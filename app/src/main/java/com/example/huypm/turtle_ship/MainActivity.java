@@ -68,16 +68,34 @@ public class MainActivity extends AppCompatActivity {
                 callback.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        progress.dismiss();
+
                         if (!response.body().equals("")){
-                            int id = Integer.valueOf(response.body());
-                            Intent intent = new Intent(getApplicationContext(), MainContent.class);
+                            final int id = Integer.valueOf(response.body());
                             Bundle bundle = new Bundle();
                             bundle.putInt("ID",id);
-                            intent.putExtra("ID",id);
-                            Log.d("item_list",String.valueOf(id));
-                            showAlertDialog_DN();
-                            startActivity(intent);
+                            DataClient check_nv = APIManagerment.getData();
+                            Call<String> callback = check_nv.check_nv(response.body());
+                            callback.enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
+                                    if (response.body().equals("0")){
+                                        progress.dismiss();
+                                        Intent intent = new Intent(getApplicationContext(), MainContent.class);
+                                        intent.putExtra("ID",id);
+                                        Log.d("item_list",String.valueOf(id));
+                                        showAlertDialog_DN();
+                                        startActivity(intent);
+                                    }else {
+                                        // nhaan vien dang nhap o day
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
+
+                                }
+                            });
+
                         }else {
                             showAlertDialog_DNTB();
                         }

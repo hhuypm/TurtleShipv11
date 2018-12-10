@@ -98,4 +98,8 @@ public interface DataClient {
     @POST("getDiaChiID.php")
     Call<List<DiaChi>> getDiaChiID(@Field("Id") String id);
 
+    @FormUrlEncoded
+    @POST("Check_NV.php")
+    Call<String> check_nv(@Field("Id") String id);
+
 }
