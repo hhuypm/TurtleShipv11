@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/login"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/thongtinnguoigui"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1.Thông tin người gửi"
+                android:textColor="#ffffff"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/tv_name_sent"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="37dp"
+                android:text="Minh Huy"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/tv_phone_sent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name_sent"
+                android:layout_marginLeft="5dp"
+                android:text="Số điện thoại: "
+                android:textSize="15dp" />
+
+            <Spinner
+                android:id="@+id/spn_sent_list_add"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_below="@+id/tv_phone_sent"
+                android:layout_marginBottom="17dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2.Thông tin người nhận"
+                android:textColor="#ffff"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/et_phone_step1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:hint="Số điện thoại người nhận"
+                android:textColor="#ffff"
+                android:textSize="15dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="230dp"
+                android:layout_marginTop="25dp"
+                android:background="@layout/border_btn"
+
+                android:text="Lịch sử"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/et_name_receive"
+                android:layout_width="176dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:hint="Tên người nhận"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="120dp"
+                android:text="TP.Hồ Chí Minh" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="115dp"
+                android:text="Thành phố"
+                android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/spn_district_receive"
+                android:layout_width="179dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="160dp"></Spinner>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="222dp"
+                android:layout_marginTop="160dp"
+                android:text="Quận"
+                android:textSize="20dp" />
+
+            <Spinner
+                android:id="@+id/spn_state_receive"
+                android:layout_width="186dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="210dp"></Spinner>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="205dp"
+                android:text="Phường"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/et_diachi_step1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="240dp"
+                android:hint="Số nhà" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="250dp"
+                android:text="Địa chỉ"
+                android:textSize="20dp" />
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:background="@layout/border_btn"
+
+            android:text="Trở về" />
+
+        <Button
+            android:id="@+id/btn_next_step_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@layout/border_btn"
+            android:layout_marginLeft="270dp"
+            android:layout_marginTop="-50dp"
+            android:text="Tiếp theo" />
+
+
+
+    </LinearLayout>
+</RelativeLayout>

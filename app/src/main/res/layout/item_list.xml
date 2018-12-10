@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:id="@+id/item_employee_ll_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:background="#F531C0"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:id="@+id/lv_ID"
+        android:layout_alignParentLeft="true"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/lv_ID"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:background="#FFFF00">
+
+        <TextView
+            android:id="@+id/lv_Ten"
+            android:layout_width="241dp"
+            android:layout_height="wrap_content"
+            android:text="Nguyê~n Nguyên Anh"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lv_DiachiGui"
+            android:layout_width="241dp"
+            android:layout_height="wrap_content"
+            android:text="Ði?a chi? gu?i : 155 Lê Anh Xuân"
+            android:textSize="8sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lv_DiachiNhan"
+            android:layout_width="242dp"
+            android:layout_height="wrap_content"
+            android:text="Ði?a chi? nhâ?n : 155 Lê Anh Xuân"
+            android:textSize="8sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lv_Sodienthoai"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:text="Sô´ diê?n thoa?i : 099999999"
+            android:textSize="8sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:id="@+id/lv_flag"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorPrimaryDark"
+        android:padding="8dp">
+
+    </ImageView>
+</RelativeLayout>

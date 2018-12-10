@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainContent">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@drawable/login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="#ffff"
+            android:textSize="20dp"
+            android:text="4.Hình thức thanh toán"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp" />
+        <CheckBox
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/cb_sent"
+            android:layout_width="wrap_content"
+            android:checked="true"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:text="Người gửi trả tiền"/>
+        <CheckBox
+            android:text="Người nhận trả tiền"
+            android:layout_marginLeft="200dp"
+            android:id="@+id/cb_receive"
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:onClick="onCheckboxClicked"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:textColor="#ffff"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5.Thông tin hàng hóa"/>
+        <EditText
+            android:layout_marginTop="40dp"
+            android:hint="Mô tả hàng hóa"
+            android:id="@+id/et_mota"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_marginTop="90dp"
+            android:hint="VD: 20000VND"
+            android:id="@+id/et_dinhgia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="20dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="100dp"
+            android:text="Định giá hàng hóa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="20dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="150dp"
+            android:text="Khối lượng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_marginTop="140dp"
+            android:hint="VD:20Kg"
+            android:id="@+id/et_KhoiLuong"
+            android:layout_width="126dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="200dp"
+            android:textSize="20dp"
+            android:text="Số lượng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_marginTop="185dp"
+            android:text=""
+            android:id="@+id/et_soluong"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <Button
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="100dp"
+        android:id="@+id/btn_back_step"
+        android:text="Trở về"
+        android:background="@layout/border_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="Tiếp theo"
+        android:id="@+id/btn_next_step_3"
+        android:layout_marginTop="-50dp"
+        android:layout_marginLeft="270dp"
+        android:background="@layout/border_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
