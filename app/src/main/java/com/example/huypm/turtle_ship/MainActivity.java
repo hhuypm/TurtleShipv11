@@ -87,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }else {
                                         // nhaan vien dang nhap o day
+                                        progress.dismiss();
+                                        Intent intent = new Intent(getApplicationContext(), MainContentShiper.class);
+                                        intent.putExtra("ID",id);
+                                        Log.d("item_list",String.valueOf(id));
+                                        showAlertDialog_DN();
+                                        startActivity(intent);
                                     }
                                 }
 

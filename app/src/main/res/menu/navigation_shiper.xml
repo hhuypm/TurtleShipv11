@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+
+    <item android:title="FSHIP FOR SHIPER">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:icon="@drawable/tinhphi"
+                    android:id="@+id/DonHangShip"
+                    android:title="Đơn hàng yêu cầu ship" />
+                <item
+                    android:icon="@drawable/xe"
+                    android:id="@+id/TimKiemDonHang"
+                    android:title="Tìm kiếm đơn hàng" />
+                <item
+                    android:icon="@drawable/add"
+                    android:id="@+id/QuanLyDonHang"
+                    android:title="Quản lý đơn hàng" />
+                <item
+                    android:icon="@drawable/add"
+                    android:id="@+id/DSThongBao"
+                    android:title="Danh sách thông báo" />
+                <item
+                    android:icon="@drawable/add"
+                    android:id="@+id/QuanLyThongTin"
+                    android:title="Quản lý thông tin" />
+                <item
+                    android:icon="@drawable/add"
+                    android:id="@+id/LienHe"
+                    android:title="Liên Hệ" />
+                <item
+                    android:icon="@drawable/lock"
+                    android:id="@+id/DoiMatKhau"
+                    android:title="Đổi mật khẩu" />
+                <item
+                    android:icon="@drawable/out"
+                    android:id="@+id/Thoat"
+                    android:title="Thoát" />
+            </group>
+        </menu>
+    </item>
+
+
+</menu>

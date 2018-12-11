@@ -19,7 +19,7 @@ import android.widget.CheckBox;
 import com.example.huypm.turtle_ship.Fragments.Orders;
 import com.example.huypm.turtle_ship.Fragments.order_step1;
 
-public class MainContent extends AppCompatActivity
+public class MainContentShiper extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnFragmentManager{
     int id_cus;
     Bundle bundle = new Bundle();
@@ -28,7 +28,7 @@ public class MainContent extends AppCompatActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_screen);
+        setContentView(R.layout.main_screen_shiper);
         Intent intent = getIntent();
         id_cus = intent.getIntExtra("ID",-1);
 
@@ -88,20 +88,19 @@ public class MainContent extends AppCompatActivity
         if (id == R.id.DonHang) {
             fragment = new Orders();
             // Handle the camera action
-        } else if (id == R.id.TheoDoiDH) {
+        } else if (id == R.id.DonHangShip) {
 
-        } else if (id == R.id.TaoDonHang) {
-            fragment = new order_step1();
+        } else if (id == R.id.TimKiemDonHang) {
 
-        } else if (id == R.id.CachTinhPhi) {
+        } else if (id == R.id.DSThongBao) {
 
-        } else if (id == R.id.DonHangCTT) {
+        } else if (id == R.id.QuanLyThongTin) {
 
-        } else if (id == R.id.DangXuat) {
-
-        } else if (id == R.id.ThongtinTK) {
+        } else if (id == R.id.LienHe) {
 
         } else if (id == R.id.DoiMatKhau) {
+
+        } else if (id == R.id.Thoat) {
 
         }
 
