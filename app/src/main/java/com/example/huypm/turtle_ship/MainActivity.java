@@ -98,22 +98,25 @@ public class MainActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<String> call, Throwable t) {
-
+                                    progress.dismiss();
+                                    showAlertDialog_DNTB();
+                                    Log.d("login",t.getMessage());
                                 }
                             });
 
                         }else {
                             showAlertDialog_DNTB();
                         }
+
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        Log.d("login",t.getMessage());
                         progress.dismiss();
                         showAlertDialog_DNTB();
                         et_account.setText("");
                         et_pass.setText("");
+                        Log.d("login1",t.getMessage());
                     }
                 });
             }

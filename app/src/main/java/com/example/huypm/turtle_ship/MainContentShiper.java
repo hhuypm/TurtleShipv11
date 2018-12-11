@@ -32,23 +32,23 @@ public class MainContentShiper extends AppCompatActivity
         Intent intent = getIntent();
         id_cus = intent.getIntExtra("ID",-1);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_shipper);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_shipper);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.open, R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_shipper);
         navigationView.setNavigationItemSelectedListener(this);
 
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_shipper);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -59,7 +59,7 @@ public class MainContentShiper extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main_shipper, menu);
         return true;
     }
 
@@ -71,7 +71,7 @@ public class MainContentShiper extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings_shipper) {
             return true;
         }
 
@@ -83,7 +83,7 @@ public class MainContentShiper extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment = null;
+        /*Fragment fragment = null;
 
         if (id == R.id.DonHang) {
             fragment = new Orders();
@@ -113,31 +113,10 @@ public class MainContentShiper extends AppCompatActivity
             ft.replace(R.id.content_main,fragment);
             ft.commit();
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+*/
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_shipper);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void onCheckboxClicked(View view) {
-        cb_sent = (CheckBox) findViewById(R.id.cb_sent);
-        cb_receive = (CheckBox) findViewById(R.id.cb_receive);
-
-        switch(view.getId()) {
-
-            case R.id.cb_sent:
-
-                cb_receive.setChecked(false);
-
-                break;
-
-            case R.id.cb_receive:
-
-                cb_sent.setChecked(false);
-
-                break;
-
-        }
     }
 
     @Override
@@ -146,6 +125,6 @@ public class MainContentShiper extends AppCompatActivity
         return bd;
     }
 
-    public static class MainContent_Shiper {
-    }
+
+
 }
