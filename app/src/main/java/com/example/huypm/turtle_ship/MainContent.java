@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import com.example.huypm.turtle_ship.Fragments.Orders;
+import com.example.huypm.turtle_ship.Fragments.account;
 import com.example.huypm.turtle_ship.Fragments.order_step1;
 import com.example.huypm.turtle_ship.Fragments.order_step2;
 
@@ -103,7 +104,7 @@ public class MainContent extends AppCompatActivity
         } else if (id == R.id.DangXuat) {
 
         } else if (id == R.id.ThongtinTK) {
-
+            fragment = new account();
         } else if (id == R.id.DoiMatKhau) {
 
         }
