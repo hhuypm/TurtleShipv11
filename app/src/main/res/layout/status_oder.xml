@@ -40,6 +40,8 @@
                 android:text="Nhận Ship"/>
 
             <Button
+                android:background="#ffff"
+                android:id="@+id/btn_daship"
                 android:text="Đã Ship"
                 android:layout_width="180dp"
                 android:layout_height="50dp"
