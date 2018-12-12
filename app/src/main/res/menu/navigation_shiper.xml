@@ -17,19 +17,19 @@
                     android:id="@+id/TimKiemDonHang"
                     android:title="Tìm kiếm đơn hàng" />
                 <item
-                    android:icon="@drawable/add"
+                    android:icon="@drawable/quanlidonhang"
                     android:id="@+id/QuanLyDonHang"
                     android:title="Quản lý đơn hàng" />
                 <item
-                    android:icon="@drawable/add"
+                    android:icon="@drawable/danhsachthongbao"
                     android:id="@+id/DSThongBao"
                     android:title="Danh sách thông báo" />
                 <item
-                    android:icon="@drawable/add"
+                    android:icon="@drawable/quanlithongtin"
                     android:id="@+id/QuanLyThongTin"
                     android:title="Quản lý thông tin" />
                 <item
-                    android:icon="@drawable/add"
+                    android:icon="@drawable/lienhe"
                     android:id="@+id/LienHe"
                     android:title="Liên Hệ" />
                 <item
