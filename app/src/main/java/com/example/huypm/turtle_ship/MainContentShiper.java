@@ -17,7 +17,10 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import com.example.huypm.turtle_ship.Fragments.Orders;
+import com.example.huypm.turtle_ship.Fragments.infor_cus;
 import com.example.huypm.turtle_ship.Fragments.order_step1;
+import com.example.huypm.turtle_ship.Fragments.status_oder;
+import com.example.huypm.turtle_ship.Fragments.status_oder1;
 
 public class MainContentShiper extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnFragmentManager{
@@ -83,19 +86,19 @@ public class MainContentShiper extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        /*Fragment fragment = null;
+        Fragment fragment = null;
 
-        if (id == R.id.DonHang) {
-            fragment = new Orders();
-            // Handle the camera action
-        } else if (id == R.id.DonHangShip) {
-
+        if (id == R.id.DonHangShip) {
+            fragment = new status_oder1();
         } else if (id == R.id.TimKiemDonHang) {
+
+        } else if (id == R.id.QuanLyDonHang) {
+            fragment = new status_oder();
 
         } else if (id == R.id.DSThongBao) {
 
         } else if (id == R.id.QuanLyThongTin) {
-
+            fragment = new infor_cus();
         } else if (id == R.id.LienHe) {
 
         } else if (id == R.id.DoiMatKhau) {
@@ -113,7 +116,7 @@ public class MainContentShiper extends AppCompatActivity
             ft.replace(R.id.content_main,fragment);
             ft.commit();
         }
-*/
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_shipper);
         drawer.closeDrawer(GravityCompat.START);
         return true;
