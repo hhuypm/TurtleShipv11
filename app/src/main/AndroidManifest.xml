@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".MainContent"></activity>
+        <activity android:name=".MainContentShiper"></activity>
     </application>
 
 </manifest>

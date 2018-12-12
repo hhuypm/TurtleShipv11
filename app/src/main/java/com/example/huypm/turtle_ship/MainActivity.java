@@ -87,27 +87,36 @@ public class MainActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }else {
                                         // nhaan vien dang nhap o day
+                                        progress.dismiss();
+                                        Intent intent = new Intent(getApplicationContext(), MainContentShiper.class);
+                                        intent.putExtra("ID",id);
+                                        Log.d("item_list",String.valueOf(id));
+                                        showAlertDialog_DN();
+                                        startActivity(intent);
                                     }
                                 }
 
                                 @Override
                                 public void onFailure(Call<String> call, Throwable t) {
-
+                                    progress.dismiss();
+                                    showAlertDialog_DNTB();
+                                    Log.d("login",t.getMessage());
                                 }
                             });
 
                         }else {
                             showAlertDialog_DNTB();
                         }
+
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        Log.d("login",t.getMessage());
                         progress.dismiss();
                         showAlertDialog_DNTB();
                         et_account.setText("");
                         et_pass.setText("");
+                        Log.d("login1",t.getMessage());
                     }
                 });
             }
