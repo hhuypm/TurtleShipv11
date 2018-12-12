@@ -113,7 +113,7 @@ public class MainContentShiper extends AppCompatActivity
             fragment.setArguments(bundle);
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft =  fm.beginTransaction();
-            ft.replace(R.id.content_main,fragment);
+            ft.replace(R.id.content_main_shipper,fragment);
             ft.commit();
         }
 
