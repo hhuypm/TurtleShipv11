@@ -19,6 +19,7 @@ import android.widget.CheckBox;
 import com.example.huypm.turtle_ship.Fragments.Orders;
 import com.example.huypm.turtle_ship.Fragments.account;
 import com.example.huypm.turtle_ship.Fragments.order_step1;
+import com.example.huypm.turtle_ship.Fragments.single_info;
 
 public class MainContent extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnFragmentManager{
@@ -90,7 +91,7 @@ public class MainContent extends AppCompatActivity
             fragment = new Orders();
             // Handle the camera action
         } else if (id == R.id.TheoDoiDH) {
-
+            fragment = new single_info();
         } else if (id == R.id.TaoDonHang) {
             fragment = new order_step1();
 
