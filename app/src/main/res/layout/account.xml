@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="200dp"
         android:orientation="vertical"
         android:background="#DDDDDD"
         android:layout_marginTop="15dp"
@@ -111,37 +111,7 @@
             </LinearLayout>
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:text="Mật khẩu hiện tại"
-                android:textColor="#3399FF"
-                android:textSize="15dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/textPassPre"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPhonetic"
-                    android:textColor="#3399FF"
-                    android:textSize="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="5dp"
-                    android:background="@layout/border_spiner"
-                    android:hint="Mật khẩu hiện tại"
-                    />
-            </LinearLayout>
-        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -173,38 +143,7 @@
                     />
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:text="Mật khẩu mới"
-                android:textColor="#3399FF"
-                android:textSize="15dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/textPassRepeatNew"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:textColor="#3399FF"
-                    android:textSize="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="5dp"
-                    android:background="@layout/border_spiner"
-                    android:hint="Nhập lại mật khẩu mới"
-                    />
-            </LinearLayout>
 
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
