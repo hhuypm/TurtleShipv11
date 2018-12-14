@@ -15,6 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.Switch;
 
 import com.example.huypm.turtle_ship.Fragments.Orders;
 import com.example.huypm.turtle_ship.Fragments.account;
@@ -27,6 +30,9 @@ public class MainContent extends AppCompatActivity
     Bundle bundle = new Bundle();
     Bundle bundle2 = new Bundle();
     private CheckBox cb_sent, cb_receive;
+    Switch switchCompat;
+    EditText passPre, passNew, passRep;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +109,7 @@ public class MainContent extends AppCompatActivity
 
         } else if (id == R.id.ThongtinTK) {
             fragment = new account();
+
         } else if (id == R.id.DoiMatKhau) {
 
         }
@@ -142,7 +149,21 @@ public class MainContent extends AppCompatActivity
 
         }
     }
-
+/*    public void onCheckedChanged(View view){
+        switchCompat = findViewById(R.id.sw);
+        passPre = findViewById(R.id.textPassPre);
+        passNew = findViewById(R.id.textPassNew);
+        passRep = findViewById(R.id.textPassRepeatNew);
+        if(switchCompat.isChecked()){
+            passPre.setEnabled(true);
+            passNew.setEnabled(true);
+            passRep.setEnabled(true);
+        }else{
+            passPre.setEnabled(false);
+            passNew.setEnabled(false);
+            passRep.setEnabled(false);
+        }
+    }*/
     @Override
     public Bundle onDataSelected(Bundle bd,String key,String data) {
         bd.putString(key,data);

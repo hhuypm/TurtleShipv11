@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".MainContent"
     android:orientation="vertical">
 
     <LinearLayout
@@ -139,7 +140,8 @@
                     android:padding="5dp"
                     android:background="@layout/border_spiner"
                     android:hint="Mật khẩu hiện tại"
-                    />
+                    android:cursorVisible="true"
+                    android:enabled="false"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -170,7 +172,8 @@
                     android:padding="5dp"
                     android:background="@layout/border_spiner"
                     android:hint="Mật khẩu mới"
-                    />
+
+                    android:enabled="false"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -201,7 +204,7 @@
                     android:padding="5dp"
                     android:background="@layout/border_spiner"
                     android:hint="Nhập lại mật khẩu mới"
-                    />
+                    android:enabled="false"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -227,11 +230,14 @@
                     android:textColor="#3399FF"
                     android:textSize="15dp"
                     android:padding="5dp"/>
+
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <Button
         android:layout_alignParentBottom="true"
+        android:id="@+id/btn_update_user"
         android:text="Cập nhật"
         android:layout_centerHorizontal="true"
         android:layout_width="match_parent"

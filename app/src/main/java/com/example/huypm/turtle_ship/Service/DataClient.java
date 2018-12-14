@@ -102,4 +102,13 @@ public interface DataClient {
     @POST("Check_NV.php")
     Call<String> check_nv(@Field("Id") String id);
 
+    @FormUrlEncoded
+    @POST("updateUsers.php")
+    Call<String> update_users(@Field("Pass") String pass);
+
+    @FormUrlEncoded
+    @POST("updateCus_emp.php")
+    Call<String> update_cus(@Field("Ten") String name
+                            ,@Field("Email") String email
+                            ,@Field("SDT") String phone);
 }
