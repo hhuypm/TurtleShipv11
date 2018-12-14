@@ -110,6 +110,6 @@ public interface DataClient {
                                 ,@Field("Weight") String weight);
 
     @POST("getDonHang.php")
-    Call<DonHangForShipper> getDonHangShipper();
+    Call<List<DonHangForShipper>> getDonHangShipper();
 
 }
