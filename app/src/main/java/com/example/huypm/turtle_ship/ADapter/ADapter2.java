@@ -30,7 +30,7 @@ public class ADapter2 extends ArrayAdapter<DonHangForShipper> {
     private Activity context;
     private TextView lv_MaDH;
     private TextView lv_Km;
-    private TextView lv_DiachiGui,lv_DiachiNhan,lv_Tienhang,lv_Tienship;
+    private TextView lv_Tienhang,lv_Tienship;
     public ADapter2(Activity context, int layoutID, List<DonHangForShipper> objects) {
         super(context, layoutID, objects);
         this.context = context;
@@ -48,8 +48,8 @@ public class ADapter2 extends ArrayAdapter<DonHangForShipper> {
 
         lv_MaDH = (TextView) convertView.findViewById(R.id.lv_MaDH);
         lv_Km = (TextView) convertView.findViewById(R.id.lv_Km);
-        lv_DiachiGui = (TextView) convertView.findViewById(R.id.lv_DiachiGui);
-        lv_DiachiNhan = (TextView) convertView.findViewById(R.id.lv_DiachiNhan);
+        final TextView lv_DiachiGui = (TextView) convertView.findViewById(R.id.lv_DiachiGui_shipper);
+        final TextView lv_DiachiNhan = (TextView) convertView.findViewById(R.id.lv_DiachiNhan_shipper);
         lv_Tienhang = (TextView) convertView.findViewById(R.id.lv_Tienhang);
         lv_Tienship = (TextView) convertView.findViewById(R.id.lv_Tienship);
         // Extract properties from cursor
@@ -57,14 +57,14 @@ public class ADapter2 extends ArrayAdapter<DonHangForShipper> {
         lv_MaDH.setText(donHangForShipper.getId());
         lv_Km.setText(donHangForShipper.getCaySo()+" km");
         DataClient diachiKH = APIManagerment.getData();
-        retrofit2.Call<List<DiaChi>> callback = diachiKH.getDiaChiID(donHangForShipper.getId());
+        retrofit2.Call<List<DiaChi>> callback = diachiKH.getDiaChiID(donHangForShipper.getDCNhanHang());
         callback.enqueue(new Callback<List<DiaChi>>() {
             @Override
             public void onResponse(retrofit2.Call<List<DiaChi>> call, Response<List<DiaChi>> response) {
                 ArrayList<DiaChi> diachiKH = (ArrayList<DiaChi>) response.body();
                 lv_DiachiGui.setText("Địa chỉ gửi hàng:"+diachiKH.get(0).getDuong()+", "+diachiKH.get(0).getPhuong()+", "+diachiKH.get(0).getQuan());
                 DataClient diachiNH = APIManagerment.getData();
-                retrofit2.Call<List<DiaChi>> callback = diachiNH.getDiaChiID(donHangForShipper.getId());
+                retrofit2.Call<List<DiaChi>> callback = diachiNH.getDiaChiID(donHangForShipper.getDCGiaoHang());
                 callback.enqueue(new Callback<List<DiaChi>>() {
                     @Override
                     public void onResponse(retrofit2.Call<List<DiaChi>> call, Response<List<DiaChi>> response) {
@@ -86,7 +86,8 @@ public class ADapter2 extends ArrayAdapter<DonHangForShipper> {
             }
         });
 
-        lv_Tienhang.setText("Tiền hàng: "+donHangForShipper.getThanhTien());
+        lv_Tienhang.setText("Tiền hàng: "+donHangForShipper.getDinhGia());
+        lv_Tienship.setText("Tiền ship: "+donHangForShipper.getThanhTien());
         //roif test thu ok
 
 

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:id="@+id/item_employee_ll_parent"
+    android:id="@+id/item_employee_ll_parent_1"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -42,14 +42,14 @@
         android:orientation="vertical"
         android:layout_below="@id/line1">
         <TextView
-            android:id="@+id/lv_DiachiGui"
+            android:id="@+id/lv_DiachiGui_shipper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Địa chỉ gửi:"
             android:textSize="10sp"
             android:textStyle="bold" />
         <TextView
-            android:id="@+id/lv_DiachiNhan"
+            android:id="@+id/lv_DiachiNhan_shipper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Địa chỉ nhận"
