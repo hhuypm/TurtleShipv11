@@ -138,8 +138,9 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:padding="5dp"
-                    android:background="@layout/border_spiner"
+                    android:background="@drawable/backgroud_disable"
                     android:hint="Mật khẩu mới"
+                    android:enabled="false"
                     />
             </LinearLayout>
         </LinearLayout>

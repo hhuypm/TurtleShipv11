@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.support.v7.widget.SwitchCompat;
 import android.widget.Toast;
 
 import com.example.huypm.turtle_ship.MainActivity;
@@ -48,6 +49,21 @@ public class account extends Fragment {
         final String idcus = String.valueOf(bundle.getInt("ID"));
         DataClient getInfo = APIManagerment.getData();
         Log.d("id",String.valueOf(bundle.getInt("ID")));
+        final SwitchCompat switch_change_pass = (SwitchCompat) view.findViewById(R.id.sw);
+        //Đây tùng
+        et_pass_new_edit = (EditText) view.findViewById(R.id.textPassNew);
+        switch_change_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (switch_change_pass.isChecked()){
+                    et_pass_new_edit.setEnabled(true);
+                    et_pass_new_edit.setBackgroundResource(R.drawable.border_spiner);
+                }else {
+                    et_pass_new_edit.setEnabled(false);
+                    et_pass_new_edit.setBackgroundResource(R.drawable.backgroud_disable);
+                }
+            }
+        });
         final Call<List<Customer_Employee>> callback = getInfo.getCusEmpInfo(String.valueOf(bundle.getInt("ID")));
         callback.enqueue(new Callback<List<Customer_Employee>>() {
             @Override
@@ -78,30 +94,32 @@ public class account extends Fragment {
                     public void onResponse(Call<String> call, Response<String> response) {
                         String result = response.body();
                         Log.d("result",result );
-                        Toast toast=Toast.makeText(getActivity(), "Bạn đã thay đổi thông tin thành công",   Toast.LENGTH_SHORT);
-                        toast.show();
+                        //update pass
+                        DataClient updatePass = APIManagerment.getData();
+                        Call<String> callback2 = updatePass.updatePass(idcus, et_pass_new_edit.getText().toString());
+                        callback2.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                String newPass = response.body();
+                                Toast.makeText(getActivity(), "Bạn đã thay đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+                                et_pass_new_edit.setText("");
+                                et_pass_new_edit.setBackgroundResource(R.drawable.backgroud_disable);
+                                switch_change_pass.setChecked(false);
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+                                Toast.makeText(getActivity(), "Bạn đã thay đổi mật khẩu không thành công", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        Log.d("result",t.getMessage() );
+                        Toast toast=Toast.makeText(getActivity(), "Bạn đã thay đổi thông tin không thành công",   Toast.LENGTH_SHORT);
                     }
                 });
-                //update pass
-                et_pass_new_edit = (EditText) view.findViewById(R.id.textPassNew);
-                Call<String> callback2 = updateUser.updatePass(idcus, et_pass_new_edit.getText().toString());
-                callback2.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        String newPass = response.body();
-                        Toast.makeText(getActivity(), "Bạn đã thay đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
-                    }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-
-                    }
-                });
             }
         });
         return view;
