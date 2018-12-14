@@ -21,6 +21,7 @@ import android.widget.Switch;
 
 import com.example.huypm.turtle_ship.Fragments.Orders;
 import com.example.huypm.turtle_ship.Fragments.account;
+import com.example.huypm.turtle_ship.Fragments.map_view;
 import com.example.huypm.turtle_ship.Fragments.order_step1;
 import com.example.huypm.turtle_ship.Fragments.single_info;
 
@@ -104,6 +105,7 @@ public class MainContent extends AppCompatActivity
         } else if (id == R.id.CachTinhPhi) {
 
         } else if (id == R.id.DonHangCTT) {
+            fragment = new map_view();
 
         } else if (id == R.id.DangXuat) {
 

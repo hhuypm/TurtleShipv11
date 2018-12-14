@@ -2,6 +2,7 @@ package com.example.huypm.turtle_ship.Service;
 
 import com.example.huypm.turtle_ship.model.Customer_Employee;
 import com.example.huypm.turtle_ship.model.DiaChi;
+import com.example.huypm.turtle_ship.model.DonHangForShipper;
 import com.example.huypm.turtle_ship.model.ItemDonHang;
 
 import java.util.List;
@@ -103,12 +104,12 @@ public interface DataClient {
     Call<String> check_nv(@Field("Id") String id);
 
     @FormUrlEncoded
-    @POST("updateUsers.php")
-    Call<String> update_users(@Field("Pass") String pass);
+    @POST("getTransportFee.php")
+    Call<String> getTrnsprtFee(@Field("Distance") String distance
+                                ,@Field("Value") String value
+                                ,@Field("Weight") String weight);
 
-    @FormUrlEncoded
-    @POST("updateCus_emp.php")
-    Call<String> update_cus(@Field("Ten") String name
-                            ,@Field("Email") String email
-                            ,@Field("SDT") String phone);
+    @POST("getDonHang.php")
+    Call<DonHangForShipper> getDonHangShipper();
+
 }
