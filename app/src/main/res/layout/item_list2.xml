@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:id="@+id/item_employee_ll_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/line1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal"
+        android:background="#FFFF">
+
+        <TextView
+            android:id="@+id/lv_MaDH"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="CU1.150410.0002     "
+            android:textColor="#0000FF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_toRightOf="@+id/lv_MaDH"
+            android:id="@+id/lv_Km"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="(8,08 km) "
+            android:textSize="10sp"
+            android:textColor="#FF0000"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/line2"
+        android:orientation="vertical"
+        android:layout_below="@id/line1">
+        <TextView
+            android:id="@+id/lv_DiachiGui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ gửi:"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/lv_DiachiNhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ nhận"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line2">
+
+        <TextView
+            android:id="@+id/lv_Tienhang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiền hàng:  "
+            android:textSize="10sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/lv_Tienship"
+            android:layout_toRightOf="@id/lv_Tienhang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiền ship:  "
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkbox"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true">
+
+    </CheckBox>
+</RelativeLayout>
