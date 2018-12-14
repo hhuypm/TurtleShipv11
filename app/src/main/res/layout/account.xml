@@ -232,6 +232,7 @@
     </LinearLayout>
     <Button
         android:layout_alignParentBottom="true"
+        android:id="@+id/btn_update"
         android:text="Cập nhật"
         android:layout_centerHorizontal="true"
         android:layout_width="match_parent"

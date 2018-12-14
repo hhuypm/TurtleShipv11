@@ -2,6 +2,7 @@ package com.example.huypm.turtle_ship.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,25 +28,40 @@ import com.example.huypm.turtle_ship.model.ChiTietDonHang;
 import com.example.huypm.turtle_ship.model.DiaChi;
 import com.example.huypm.turtle_ship.model.DonHang;
 import com.example.huypm.turtle_ship.model.NguoiNhan;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
+import java.util.List;
 
+import Modules.DirectionFinder;
+import Modules.DirectionFinderListener;
+import Modules.Route;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class order_step3 extends Fragment {
+public class order_step3 extends Fragment implements DirectionFinderListener {
     TextView tv_name_sent,tv_phone_sent;
     Spinner spn_sent_list_add,spn_district_receive,spn_state_receive;
     EditText et_name_receive,et_phone_step1,et_diachi_step1;
     TextView tv_info_dinhgia,tv_info_hinhthuc,vt_info_sl,vt_info_kl,tv_name_sent_step_3,tv_sdt_sent,tv_diachi_sent,tv_name_receive,tv_sdt_receive,tv_diachi_receive,vt_info_mota;
-    Button btn_xacnhan;
+    Button btn_xacnhan, btn_map;
+    Bundle bundle1;
+    String quangduong,phi;
+    View view;
+    private ProgressDialog progressDialog;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.order_step_3, container, false);
+        view = inflater.inflate(R.layout.order_step_3, container, false);
         final Bundle bundle = getArguments();
+        bundle1 = bundle;
+        sendRequest();
         tv_name_sent_step_3 = view.findViewById(R.id.tv_name_sent_step_3);
         tv_name_sent_step_3.setText("Người gửi: "+bundle.getString("tv_name_sent"));
 
@@ -74,7 +90,7 @@ public class order_step3 extends Fragment {
         vt_info_kl.setText("Khối lượng: "+bundle.getString("et_KhoiLuong"));
 
         vt_info_sl = view.findViewById(R.id.vt_info_sl);
-        vt_info_sl.setText("Khối lượng: "+bundle.getString("et_soluong"));
+        vt_info_sl.setText("So lượng: "+bundle.getString("et_soluong"));
 
         tv_info_hinhthuc = view.findViewById(R.id.tv_info_hinhthuc);
         if (bundle.getString("hinhthuc").toString().equals("2"))
@@ -83,7 +99,7 @@ public class order_step3 extends Fragment {
             tv_info_hinhthuc.setText("Người gửi trả phí");
 
         tv_info_dinhgia = view.findViewById(R.id.tv_info_dinhgia);
-        tv_info_dinhgia.setText("Khối lượng: "+bundle.getString("et_dinhgia"));
+        tv_info_dinhgia.setText("Gia san pham: "+bundle.getString("et_dinhgia"));
 
         Button btn_back = (Button) view.findViewById(R.id.btn_back_step_2);
 
@@ -92,6 +108,19 @@ public class order_step3 extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
                 fm.popBackStack();
+            }
+        });
+        btn_map = view.findViewById(R.id.btn_map);
+        btn_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new map_view();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft =  fm.beginTransaction();
+                ft.addToBackStack(null);
+                fragment.setArguments(bundle);
+                ft.replace(R.id.content_main,fragment);
+                ft.commit();
             }
         });
         btn_xacnhan = view.findViewById(R.id.btn_accept_order);
@@ -120,7 +149,7 @@ public class order_step3 extends Fragment {
                             public void onResponse(retrofit2.Call<String> call, Response<String> response) {
                                 DataClient insertDonHang = APIManagerment.getData();
                                 String ngaydat = String.valueOf(Calendar.getInstance().getTime());
-                                final retrofit2.Call<String> callback = insertDonHang.InsertDonHang(String.valueOf(bundle.getInt("ID")),idNguoiNhan,ngaydat ,"","",bundle.getString("id_diachi_kh"),response.body(),bundle.getString("hinhthuc"),"0","0");
+                                final retrofit2.Call<String> callback = insertDonHang.InsertDonHang(String.valueOf(bundle.getInt("ID")),idNguoiNhan,ngaydat ,"","",bundle.getString("id_diachi_kh"),response.body(),bundle.getString("hinhthuc"),quangduong,phi);
                                 callback.enqueue(new Callback<String>() {
                                     @Override
                                     public void onResponse(retrofit2.Call<String> call, Response<String> response) {
@@ -142,6 +171,8 @@ public class order_step3 extends Fragment {
 
                                             @Override
                                             public void onFailure(retrofit2.Call<String> call, Throwable t) {
+                                                progress.dismiss();
+                                                Toast.makeText(getContext(), "Server lỗi thử lại", Toast.LENGTH_SHORT).show();
                                                 Log.d("bugCTDH",t.getMessage());
                                             }
                                         });
@@ -149,6 +180,8 @@ public class order_step3 extends Fragment {
 
                                     @Override
                                     public void onFailure(retrofit2.Call<String> call, Throwable t) {
+                                        progress.dismiss();
+                                        Toast.makeText(getContext(), "Server lỗi thử lại", Toast.LENGTH_SHORT).show();
                                         Log.d("bugDonHang",t.getMessage());
                                     }
                                 });
@@ -156,6 +189,8 @@ public class order_step3 extends Fragment {
 
                             @Override
                             public void onFailure(retrofit2.Call<String> call, Throwable t) {
+                                progress.dismiss();
+                                Toast.makeText(getContext(), "Server lỗi thử lại", Toast.LENGTH_SHORT).show();
                                 Log.d("bugDiaChi",t.getMessage());
                             }
                         });
@@ -163,6 +198,8 @@ public class order_step3 extends Fragment {
 
                     @Override
                     public void onFailure(retrofit2.Call<String> call, Throwable t) {
+                        progress.dismiss();
+                        Toast.makeText(getContext(), "Server lỗi thử lại", Toast.LENGTH_SHORT).show();
                         Log.d("bug",t.getMessage());
                     }
                 });
@@ -172,4 +209,48 @@ public class order_step3 extends Fragment {
         return view;
     }
 
+    private void sendRequest() {
+        String origin = bundle1.getString("spn_sent_list_add");
+        String destination = bundle1.getString("et_diachi_step1")+","+bundle1.getString("spn_state_receive")+","+bundle1.getString("spn_district_receive") +"Tp. Hồ Chí Minh";
+
+        try {
+            new DirectionFinder(this, origin, destination).execute();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onDirectionFinderStart() {
+        progressDialog = ProgressDialog.show(getContext(), "Please wait.",
+                "Finding direction..!", true);
+    }
+
+    @Override
+    public void onDirectionFinderSuccess(List<Route> routes) {
+
+        for (Route route : routes) {
+
+            ((TextView) view.findViewById(R.id.vt_quangduong)).setText("Quãng đường:"+route.distance.text);
+            int start = route.distance.text.length()-2;
+            quangduong = route.distance.text.substring(0,start).trim();
+            DataClient getFee = APIManagerment.getData();
+            retrofit2.Call<String> callback = getFee.getTrnsprtFee(quangduong,bundle1.getString("et_dinhgia"),bundle1.getString("et_KhoiLuong"));
+            callback.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(retrofit2.Call<String> call, Response<String> response) {
+                    progressDialog.dismiss();
+                    ((TextView) view.findViewById(R.id.vt_phi)).setText("Phi:"+response.body());
+                    phi = response.body();
+                }
+
+                @Override
+                public void onFailure(retrofit2.Call<String> call, Throwable t) {
+                    Log.d("phi",t.getMessage());
+                }
+            });
+            Log.d("quang duong",quangduong);
+        }
+
+    }
 }

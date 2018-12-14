@@ -92,6 +92,15 @@
             android:layout_marginStart="10dp"
             android:background="@layout/border_btn"
             android:text="Trở về" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@layout/border_btn"
+            android:text="Xem map"
+            android:id="@+id/btn_map"
+            android:layout_below="@+id/vt_quangduong"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"/>
 
         <TextView
             android:id="@+id/tv_diachi_sent"

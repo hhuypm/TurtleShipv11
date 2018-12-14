@@ -77,7 +77,7 @@ public class order_step1 extends Fragment {
                             final ArrayList<DiaChi> mangdiachi = (ArrayList<DiaChi>) response.body();
                             String[] listdiachi_spn = new String[mangdiachi.size()];
                             for (int i=0; i<mangdiachi.size();i++ ){
-                                listdiachi_spn[i] = mangdiachi.get(i).getDuong()+" "+mangdiachi.get(i).getPhuong()+" "+mangdiachi.get(i).getQuan()+" "+mangdiachi.get(i).getThanhPho();
+                                listdiachi_spn[i] = mangdiachi.get(i).getDuong()+", "+mangdiachi.get(i).getPhuong()+", "+mangdiachi.get(i).getQuan()+", "+mangdiachi.get(i).getThanhPho();
                                 Log.d("TEstcainua"+String.valueOf(i),mangdiachi.get(i).getDuong()+" "+mangdiachi.get(i).getPhuong()+" "+mangdiachi.get(i).getQuan()+" "+mangdiachi.get(i).getThanhPho());
                             }
                             Spinner spn = view.findViewById(R.id.spn_sent_list_add);
@@ -100,7 +100,7 @@ public class order_step1 extends Fragment {
 
                         @Override
                         public void onFailure(retrofit2.Call<List<DiaChi>> call, Throwable t) {
-
+                            Log.d("diachi",t.getMessage());
                         }
                     });
                 }
@@ -108,7 +108,7 @@ public class order_step1 extends Fragment {
 
             @Override
             public void onFailure(retrofit2.Call<List<Customer_Employee>> call, Throwable t) {
-
+                Log.d("tensdt",t.getMessage());
             }
         });
 
