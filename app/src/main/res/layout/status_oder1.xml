@@ -36,6 +36,7 @@
                 android:paddingLeft="10dp"
                 android:drawableLeft="@drawable/seach"
                 android:hint="Nhập mã đơn hàng"
+                android:id="@+id/et_search_all"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content" />
             <Button
@@ -44,6 +45,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:background="@layout/border_btn"
+                android:id="@+id/search_all"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
