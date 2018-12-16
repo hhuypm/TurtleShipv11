@@ -51,6 +51,9 @@
                     android:id="@+id/ThongtinTK"
                     android:title="Thông tin tài khoản" />
                 <item
+                    android:id="@+id/listAdress"
+                    android:title="Danh sách địa chỉ"/>
+                <item
                     android:icon="@drawable/lock"
                     android:id="@+id/DoiMatKhau"
                     android:title="Đổi Mật Khẩu" />

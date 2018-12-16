@@ -106,6 +106,7 @@ public class account extends Fragment {
                                 Toast.makeText(getActivity(), "Bạn đã thay đổi thông tin thành công", Toast.LENGTH_SHORT).show();
                                 et_pass_new_edit.setText("");
                                 et_pass_new_edit.setBackgroundResource(R.drawable.backgroud_disable);
+                                et_pass_new_edit.setEnabled(false);
                                 switch_change_pass.setChecked(false);
                             }
 

@@ -114,6 +114,14 @@ public interface DataClient {
     Call<List<DonHangForShipper>> getDonHangShipper();
 
     @FormUrlEncoded
+    @POST("getDonHangShipped.php")
+    Call<List<DonHangForShipper>> getDonHangShipped(@Field("Id") String id);
+
+    @FormUrlEncoded
+    @POST("getDonHangOfShipper.php")
+    Call<List<DonHangForShipper>> getDonHangOfShipper(@Field("Id") String id);
+
+    @FormUrlEncoded
     @POST("updateCus_emp.php")
     Call<String> updateCus(@Field("Id") String id
                             ,@Field("Ten") String ten
