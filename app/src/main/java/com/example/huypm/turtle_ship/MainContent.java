@@ -21,6 +21,7 @@ import android.widget.Switch;
 
 import com.example.huypm.turtle_ship.Fragments.Orders;
 import com.example.huypm.turtle_ship.Fragments.account;
+import com.example.huypm.turtle_ship.Fragments.list_Address;
 import com.example.huypm.turtle_ship.Fragments.map_view;
 import com.example.huypm.turtle_ship.Fragments.order_step1;
 import com.example.huypm.turtle_ship.Fragments.single_info;
@@ -114,6 +115,8 @@ public class MainContent extends AppCompatActivity
 
         } else if (id == R.id.DoiMatKhau) {
 
+        } else if(id == R.id.listAdress){
+            fragment = new list_Address();
         }
 
         if (fragment != null){
