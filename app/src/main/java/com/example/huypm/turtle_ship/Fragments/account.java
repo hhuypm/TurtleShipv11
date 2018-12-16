@@ -30,6 +30,7 @@ import retrofit2.Response;
 public class account extends Fragment {
     EditText et_name_edit,et_email_edit,et_phone_edit, et_pass_new_edit;
     Bundle bundle;
+    Customer_Employee Info;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +70,7 @@ public class account extends Fragment {
             @Override
             public void onResponse(Call<List<Customer_Employee>> call, Response<List<Customer_Employee>> response) {
                 ArrayList<Customer_Employee> mangthongtin = (ArrayList<Customer_Employee>) response.body();
+                Info = mangthongtin.get(0);
                 et_name_edit = (EditText) view.findViewById(R.id.textName);
                 et_name_edit.setText(mangthongtin.get(0).getTen());
                 et_email_edit = (EditText) view.findViewById(R.id.textMail);
@@ -109,6 +111,9 @@ public class account extends Fragment {
 
                             @Override
                             public void onFailure(Call<String> call, Throwable t) {
+                                et_pass_new_edit.setText("");
+                                et_pass_new_edit.setBackgroundResource(R.drawable.backgroud_disable);
+                                switch_change_pass.setChecked(false);
                                 Toast.makeText(getActivity(), "Bạn đã thay đổi mật khẩu không thành công", Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -116,6 +121,9 @@ public class account extends Fragment {
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
+                        et_name_edit.setText(Info.getTen());
+                        et_email_edit.setText(Info.getEmail());
+                        et_phone_edit.setText(Info.getSDT());
                         Toast toast=Toast.makeText(getActivity(), "Bạn đã thay đổi thông tin không thành công",   Toast.LENGTH_SHORT);
                     }
                 });

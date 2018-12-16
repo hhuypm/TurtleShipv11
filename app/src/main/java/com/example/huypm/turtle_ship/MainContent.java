@@ -24,6 +24,7 @@ import com.example.huypm.turtle_ship.Fragments.account;
 import com.example.huypm.turtle_ship.Fragments.map_view;
 import com.example.huypm.turtle_ship.Fragments.order_step1;
 import com.example.huypm.turtle_ship.Fragments.single_info;
+import com.example.huypm.turtle_ship.model.ItemDonHang;
 
 public class MainContent extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnFragmentManager{
@@ -168,9 +169,10 @@ public class MainContent extends AppCompatActivity
     }*/
     @Override
     public Bundle onDataSelected(Bundle bd,String key,String data) {
-        bd.putString(key,data);
+            bd.putString(key,data);
         return bd;
     }
+
 
     public static class MainContent_Shiper {
     }

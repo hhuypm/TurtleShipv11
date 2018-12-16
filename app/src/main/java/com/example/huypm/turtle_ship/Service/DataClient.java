@@ -3,6 +3,7 @@ package com.example.huypm.turtle_ship.Service;
 import com.example.huypm.turtle_ship.model.Customer_Employee;
 import com.example.huypm.turtle_ship.model.DiaChi;
 import com.example.huypm.turtle_ship.model.DonHangForShipper;
+import com.example.huypm.turtle_ship.model.DonHangFullInfo;
 import com.example.huypm.turtle_ship.model.ItemDonHang;
 
 import java.util.List;
@@ -93,7 +94,7 @@ public interface DataClient {
 
     @FormUrlEncoded
     @POST("getInfoDonHang.php")
-    Call<List<ItemDonHang>> getInfoDonHang(@Field("Id") String id);
+    Call<List<DonHangFullInfo>> getInfoDonHang(@Field("Id") String id);
 
     @FormUrlEncoded
     @POST("getDiaChiID.php")

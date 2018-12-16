@@ -16,21 +16,15 @@
             android:layout_height="25dp"
             android:background="#006666">
 
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:padding="5dp"
-                android:text="Mã đơn hàng"
-                android:textColor="#FFFFFF"
-                android:textSize="10dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="5dp"
-                android:text="Ngày đặt"
+                android:text="Ngày đặt: "
+                android:id="@+id/tv_single_ngaydat"
                 android:textColor="#FFFFFF"
                 android:textSize="10dp" />
 
@@ -40,6 +34,7 @@
                 android:layout_gravity="right"
                 android:padding="5dp"
                 android:text="Trạng thái"
+                android:id="@+id/tv_single_stt"
                 android:textColor="#FFFFFF"
                 android:textSize="10dp" />
         </FrameLayout>
@@ -58,7 +53,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:padding="5dp"
-                    android:text="Tên sản phẩm"
+                    android:id="@+id/tv_single_mota"
+                    android:text="Mô tả: "
                     android:textColor="#111111"
                     android:textSize="10dp" />
 
@@ -67,7 +63,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:padding="5dp"
-                    android:text="Khối lượng"
+                    android:text="Khối lượng: "
+                    android:id="@+id/tv_single_kl"
                     android:textColor="#111111"
                     android:textSize="10dp" />
             </FrameLayout>
@@ -80,7 +77,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Mô tả"
+                    android:text="Giá sản phẩm: "
+                    android:id="@+id/tv_single_gia"
                     android:textColor="#111111"
                     android:textSize="10dp" />
 
@@ -89,7 +87,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:padding="5dp"
-                    android:text="Số lượng"
+                    android:text="Số lượng: "
+                    android:id="@+id/tv_single_sl"
                     android:textColor="#111111"
                     android:textSize="10dp" />
             </FrameLayout>
@@ -137,6 +136,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" Mã ĐH"
+                        android:id="@+id/tv_single_maDH"
                         android:textColor="#111111" />
                 </LinearLayout>
             </LinearLayout>
@@ -206,6 +206,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" Ngày giao"
+                        android:id="@+id/tv_single_ngaygiao"
                         android:textColor="#111111" />
                 </LinearLayout>
             </LinearLayout>
@@ -229,6 +230,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" Ngày nhận"
+                        android:id="@+id/tv_single_ngaynhan"
                         android:textColor="#111111" />
                 </LinearLayout>
             </LinearLayout>
@@ -252,6 +254,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" Người gửi trả / người trả gửi"
+                        android:id="@+id/tv_single_hinhthuc"
                         android:textColor="#111111" />
                 </LinearLayout>
             </LinearLayout>
@@ -283,6 +286,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|right"
                     android:background="#006666"
+                    android:id="@+id/btn_single_sdtnhan"
                     android:drawableLeft="@drawable/ic_phone_black_24dp"
                     android:padding="5dp"
                     android:text="0947504049"
@@ -299,6 +303,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vũ Xuân Tùng"
+                    android:id="@+id/tv_single_nguoinhan"
                     android:textColor="#000000"
                     android:textSize="15dp"
                     android:textStyle="bold" />
@@ -323,6 +328,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="phường linh trung ,quận thủ đức ,thành phố hồ chí minh"
+                    android:id="@+id/tv_single_dcnhan"
                     android:textColor="#777777"
                     android:textSize="12dp" />
             </LinearLayout>
@@ -357,6 +363,7 @@
                     android:drawableLeft="@drawable/ic_phone_black_24dp"
                     android:padding="5dp"
                     android:text="0947504049"
+                    android:id="@+id/btn_single_sdtgui"
                     android:textColor="#FFFFFF"
                     android:textSize="15dp"
                     android:textStyle="bold" />
@@ -372,6 +379,7 @@
                     android:text="Vũ Xuân Tùng"
                     android:textColor="#000000"
                     android:textSize="15dp"
+                    android:id="@+id/tv_single_nguoigui"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -395,6 +403,7 @@
                     android:layout_height="wrap_content"
                     android:text="phường linh trung ,quận thủ đức ,thành phố hồ chí minh"
                     android:textColor="#777777"
+                    android:id="@+id/tv_single_dcgui"
                     android:textSize="12dp" />
             </LinearLayout>
         </LinearLayout>
@@ -427,7 +436,7 @@
                     android:background="#006666"
                     android:drawableLeft="@drawable/ic_phone_black_24dp"
                     android:padding="5dp"
-                    android:text="0947504049"
+                    android:id="@+id/btn_single_sdtshipper"
                     android:textColor="#FFFFFF"
                     android:textSize="15dp"
                     android:textStyle="bold" />
@@ -440,7 +449,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Vũ Xuân Tùng"
+                    android:id="@+id/tv_single_shipper"
                     android:textColor="#000000"
                     android:textSize="15dp"
                     android:textStyle="bold" />
@@ -466,6 +475,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" 100.000đ"
+                        android:id="@+id/tv_single_tienship"
                         android:textColor="#111111"
                         android:textStyle="bold"/>
                 </LinearLayout>
