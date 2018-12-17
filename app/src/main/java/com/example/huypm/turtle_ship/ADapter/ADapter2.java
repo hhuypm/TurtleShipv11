@@ -2,21 +2,31 @@ package com.example.huypm.turtle_ship.ADapter;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.huypm.turtle_ship.DBManager.TurtleShipManager;
+import com.example.huypm.turtle_ship.Fragments.list_Address;
+import com.example.huypm.turtle_ship.Fragments.status_oder1;
 import com.example.huypm.turtle_ship.R;
 import com.example.huypm.turtle_ship.Service.APIManagerment;
 import com.example.huypm.turtle_ship.Service.DataClient;
 import com.example.huypm.turtle_ship.model.DiaChi;
 import com.example.huypm.turtle_ship.model.DonHang;
 import com.example.huypm.turtle_ship.model.DonHangForShipper;
+import com.example.huypm.turtle_ship.model.DonHangFullInfo;
 import com.example.huypm.turtle_ship.model.ItemDonHang;
 
 import java.util.ArrayList;
@@ -25,13 +35,14 @@ import java.util.List;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ADapter2 extends ArrayAdapter<DonHangForShipper> {
+public class ADapter2 extends ArrayAdapter<DonHangFullInfo> {
 
     private Activity context;
     private TextView lv_MaDH;
     private TextView lv_Km;
     private TextView lv_Tienhang,lv_Tienship;
-    public ADapter2(Activity context, int layoutID, List<DonHangForShipper> objects) {
+
+    public ADapter2(Activity context, int layoutID, List<DonHangFullInfo> objects) {
         super(context, layoutID, objects);
         this.context = context;
     }
@@ -43,7 +54,7 @@ public class ADapter2 extends ArrayAdapter<DonHangForShipper> {
                     false);
         }
 
-        final DonHangForShipper donHangForShipper = getItem(position);
+        final DonHangFullInfo donHangForShipper = getItem(position);
 
 
         lv_MaDH = (TextView) convertView.findViewById(R.id.lv_MaDH);
@@ -88,7 +99,40 @@ public class ADapter2 extends ArrayAdapter<DonHangForShipper> {
 
         lv_Tienhang.setText("Tiền hàng: "+donHangForShipper.getDinhGia());
         lv_Tienship.setText("Tiền ship: "+donHangForShipper.getThanhTien());
-        //roif test thu ok
+
+        Button btn = convertView.findViewById(R.id.btn_nhandon_nhanh);
+        if (donHangForShipper.getTrangThai().equals("-1")){
+            btn.setVisibility(View.VISIBLE);
+        }
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataClient nhandon = APIManagerment.getData();
+                retrofit2.Call<String> callback = nhandon.ShipperNhanDonHang(donHangForShipper.getId(),donHangForShipper.getShipper());
+                callback.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(retrofit2.Call<String> call, Response<String> response) {
+                        if (response.body().equals("ok")){
+                            Fragment fragment = new status_oder1();
+                            FragmentManager fm = ((AppCompatActivity)context).getSupportFragmentManager();
+                            FragmentTransaction ft =  fm.beginTransaction();
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("ID",Integer.valueOf(donHangForShipper.getShipper()));
+                            fragment.setArguments(bundle);
+                            ft.addToBackStack(null);
+                            ft.replace(R.id.content_main_shipper,fragment);
+                            ft.commit();
+                            Toast.makeText(getContext(), "Nhận đơn thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(retrofit2.Call<String> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
 
 
 

@@ -1,9 +1,8 @@
 package com.example.huypm.turtle_ship.Fragments;
 
+
 import android.Manifest;
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,6 +12,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,34 +29,28 @@ import com.example.huypm.turtle_ship.Service.DataClient;
 import com.example.huypm.turtle_ship.model.Customer_Employee;
 import com.example.huypm.turtle_ship.model.DiaChi;
 import com.example.huypm.turtle_ship.model.DonHangFullInfo;
-import com.example.huypm.turtle_ship.model.ItemDonHang;
+import com.google.android.gms.common.SignInButton;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class single_info extends Fragment {
+public class single_order_shipper extends Fragment {
     TextView tv_single_ngaydat,tv_single_mota,tv_single_kl,tv_single_gia,tv_single_sl,tv_single_maDH,tv_single_ngaygiao,
-            tv_single_ngaynhan,tv_single_hinhthuc,tv_single_nguoinhan,tv_single_dcnhan,tv_single_nguoigui,tv_single_dcgui
-            ,tv_single_shipper,tv_single_tienship,tv_single_stt;
-    Button btn_single_sdtshipper,btn_single_sdtnhan,btn_single_sdtgui;
+            tv_single_ngaynhan,tv_single_hinhthuc,tv_single_nguoinhan,tv_single_dcnhan,tv_single_nguoigui,tv_single_dcgui,tv_single_stt,tv_ship;
+    Button btn_single_sdtnhan,btn_single_sdtgui,btn_NhanDon_shipper,btn_LayHang_shipper,btn_GuiHang_shipper;
     String number;
-
     private static final int REQUEST_CALL = 1;
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.single_infomation,container,false);
-        Bundle bundle = getArguments();
+        View view = inflater.inflate(R.layout.single_order_shipper,container,false);
+
+        final Bundle bundle = getArguments();
         final ProgressDialog progress = ProgressDialog.show(getActivity(),
                 "Tải thông tin", "Đợi 1 chút xíu....", false, true, new DialogInterface.OnCancelListener() {
                     @Override
@@ -65,6 +60,125 @@ public class single_info extends Fragment {
                 });
         progress.show();
         final DonHangFullInfo itemDonHang = (DonHangFullInfo) bundle.getSerializable("ItemDonHang");
+
+        tv_single_stt = view.findViewById(R.id.tv_single_stt);
+
+        btn_NhanDon_shipper = view.findViewById(R.id.btn_NhanDon_shipper);
+        final String idshipper = String.valueOf(bundle.getInt("ID"));
+        btn_NhanDon_shipper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataClient shippernhandon = APIManagerment.getData();
+                Call<String> callback = shippernhandon.ShipperNhanDonHang(itemDonHang.getId(),idshipper);
+                callback.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (response.body().equals("ok")){
+                            Fragment fragment = null;
+                            fragment = new single_order_shipper();
+                            FragmentManager fm = getFragmentManager();
+                            itemDonHang.setShipper(idshipper);
+                            bundle.putSerializable("ItemDonHang",itemDonHang);
+                            fragment.setArguments(bundle);
+                            FragmentTransaction ft =  fm.beginTransaction();
+                            ft.replace(R.id.content_main_shipper,fragment);
+                            ft.commit();
+                            Toast.makeText(getContext(), "Nhận đơn thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Log.d("nhandon",t.getMessage());
+                    }
+                });
+            }
+        });
+        btn_LayHang_shipper = view.findViewById(R.id.btn_LayHang_shipper);
+        btn_LayHang_shipper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataClient layhang = APIManagerment.getData();
+                final String ngaygiao = String.valueOf(Calendar.getInstance().getTime());
+                Call<String> callback = layhang.ShipperNhanHang(itemDonHang.getId(),ngaygiao);
+                callback.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (response.body().equals("ok")){
+                            Fragment fragment = null;
+                            fragment = new single_order_shipper();
+                            FragmentManager fm = getFragmentManager();
+                            itemDonHang.setTrangThai("2");
+                            itemDonHang.setNgayGiao(ngaygiao);
+                            bundle.putSerializable("ItemDonHang",itemDonHang);
+                            fragment.setArguments(bundle);
+                            FragmentTransaction ft =  fm.beginTransaction();
+                            ft.replace(R.id.content_main_shipper,fragment);
+                            ft.commit();
+                            Toast.makeText(getContext(), "Lấy hàng thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Log.d("nhandon",t.getMessage());
+                    }
+                });
+            }
+        });
+        btn_GuiHang_shipper = view.findViewById(R.id.btn_GuiHang_shipper);
+        btn_GuiHang_shipper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataClient guihang = APIManagerment.getData();
+                final String ngaynhan = String.valueOf(Calendar.getInstance().getTime());
+                Call<String> callback = guihang.ShipperGiaoHang(itemDonHang.getId(),ngaynhan);
+                callback.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (response.body().equals("ok")){
+                            Fragment fragment = null;
+                            fragment = new single_order_shipper();
+                            FragmentManager fm = getFragmentManager();
+                            itemDonHang.setTrangThai("3");
+                            itemDonHang.setNgayNhan(ngaynhan);
+                            bundle.putSerializable("ItemDonHang",itemDonHang);
+                            fragment.setArguments(bundle);
+                            FragmentTransaction ft =  fm.beginTransaction();
+                            ft.replace(R.id.content_main_shipper,fragment);
+                            ft.commit();
+                            Toast.makeText(getContext(), "Gửi hàng thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Log.d("nhandon",t.getMessage());
+                    }
+                });
+            }
+        });
+        switch (itemDonHang.getTrangThai()) {
+            case "-1":
+                tv_single_stt.setText("Chờ shipper nhận");
+                btn_NhanDon_shipper.setVisibility(view.VISIBLE);
+                break;
+            case "0":
+                tv_single_stt.setText("Đã hủy đơn");
+                break;
+            case "1":
+                    tv_single_stt.setText("Chờ shipper lấy hàng");
+                    btn_LayHang_shipper.setVisibility(view.VISIBLE);
+                break;
+            case "2":
+                tv_single_stt.setText("Đang giao hàng");
+                btn_GuiHang_shipper.setVisibility(view.VISIBLE);
+                break;
+            case "3":
+                tv_single_stt.setText("Đã giao hàng");
+        }
+        tv_ship = view.findViewById(R.id.tv_ship);
+        tv_ship.setText(itemDonHang.getThanhTien()+" đ");
 
         tv_single_ngaydat = view.findViewById(R.id.tv_single_ngaydat);
         tv_single_ngaydat.setText(tv_single_ngaydat.getText()+itemDonHang.getNgayDat());
@@ -107,37 +221,12 @@ public class single_info extends Fragment {
 
         tv_single_dcgui = view.findViewById(R.id.tv_single_dcgui);
 
-        tv_single_shipper = view.findViewById(R.id.tv_single_shipper);
-
-
-        tv_single_tienship = view.findViewById(R.id.tv_single_tienship);
-        tv_single_tienship.setText(itemDonHang.getThanhTien());
-
-        btn_single_sdtshipper = view.findViewById(R.id.btn_single_sdtshipper);
 
         btn_single_sdtnhan = view.findViewById(R.id.btn_single_sdtnhan);
         btn_single_sdtnhan.setText(itemDonHang.getSDTNguoiNhan());
 
         btn_single_sdtgui = view.findViewById(R.id.btn_single_sdtgui);
         btn_single_sdtgui.setText(itemDonHang.getSDT());
-        tv_single_stt = view.findViewById(R.id.tv_single_stt);
-        switch (itemDonHang.getTrangThai()) {
-            case "0":
-                tv_single_stt.setText("Đã hủy đơn");
-                break;
-            case "1":
-                if (itemDonHang.getShipper().equals("0")){
-                    tv_single_stt.setText("Chờ shipper nhận");
-                }else {
-                    tv_single_stt.setText("Chờ shipper lấy hàng");
-                }
-                break;
-            case "2":
-                tv_single_stt.setText("Đang giao hàng");
-                break;
-            case "3":
-                tv_single_stt.setText("Đã giao hàng");
-        }
 
         DataClient getdb = APIManagerment.getData();
         Call<List<DiaChi>> callback = getdb.getDiaChiID(itemDonHang.getDCGiaoHang());
@@ -153,22 +242,7 @@ public class single_info extends Fragment {
                     public void onResponse(Call<List<DiaChi>> call, Response<List<DiaChi>> response) {
                         ArrayList<DiaChi> dcnhan = (ArrayList<DiaChi>) response.body();
                         tv_single_dcgui.setText(dcnhan.get(0).getDuong()+", "+dcnhan.get(0).getPhuong()+", "+dcnhan.get(0).getQuan()+", Tp. Hồ Chí Minh");
-                        DataClient getdb = APIManagerment.getData();
-                        Call<List<Customer_Employee>> callback = getdb.getCusEmpInfo(itemDonHang.getShipper());
-                        callback.enqueue(new Callback<List<Customer_Employee>>() {
-                            @Override
-                            public void onResponse(Call<List<Customer_Employee>> call, Response<List<Customer_Employee>> response) {
-                                ArrayList<Customer_Employee> shipper = (ArrayList<Customer_Employee>) response.body();
-                                tv_single_shipper.setText(shipper.get(0).getTen());
-                                btn_single_sdtshipper.setText(shipper.get(0).getSDT());
-                                progress.dismiss();
-                            }
-
-                            @Override
-                            public void onFailure(Call<List<Customer_Employee>> call, Throwable t) {
-                                progress.dismiss();
-                            }
-                        });
+                        progress.dismiss();
                     }
 
                     @Override
@@ -183,19 +257,6 @@ public class single_info extends Fragment {
                 progress.dismiss();
             }
         });
-
-
-
-
-        btn_single_sdtshipper.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                number = btn_single_sdtshipper.getText().toString().trim();
-                makePhoneCall();
-            }
-        });
-
-
 
         btn_single_sdtnhan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,12 +274,10 @@ public class single_info extends Fragment {
                 makePhoneCall();
             }
         });
-
-
-
         return view;
 
     }
+
     public void makePhoneCall(){
         if (number.trim().length()>0){
             if (ContextCompat.checkSelfPermission(getContext(),Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED){
@@ -246,6 +305,5 @@ public class single_info extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Thông tin đơn hàng");
     }
 }

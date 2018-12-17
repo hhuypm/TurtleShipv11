@@ -88,7 +88,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="160dp"
             android:layout_marginBottom="5dp"
             android:background="#EEEEEE"
             android:orientation="vertical"
@@ -157,7 +157,29 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tiền ship:"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Tiền sp giao hàng"
+                        android:id="@+id/tv_ship"
+                        android:textColor="#111111" />
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -260,6 +282,7 @@
                     android:background="#006666"
                     android:id="@+id/btn_single_sdtnhan"
                     android:drawableLeft="@drawable/ic_phone_black_24dp"
+
                     android:padding="5dp"
                     android:text="0947504049"
                     android:textColor="#FFFFFF"
@@ -384,7 +407,6 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_marginBottom="5dp"
-            android:background="#EEEEEE"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -392,66 +414,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|left"
-                    android:text="SHIPPER"
-                    android:textStyle="bold"
-                    android:textSize="15dp"
-                    android:textColor="#0033CC"/>
-
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|right"
-                    android:background="#006666"
-                    android:drawableLeft="@drawable/ic_phone_black_24dp"
+                    android:background="@layout/border_btn"
+                    android:text="Nhận đơn"
                     android:padding="5dp"
-                    android:id="@+id/btn_single_sdtshipper"
+                    android:visibility="gone"
+                    android:id="@+id/btn_NhanDon_shipper"
                     android:textColor="#FFFFFF"
                     android:textSize="15dp"
                     android:textStyle="bold" />
-            </FrameLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_single_shipper"
-                    android:textColor="#000000"
+                    android:layout_gravity="top|right"
+                    android:background="@layout/border_btn"
+                    android:text="Lấy hàng"
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    android:id="@+id/btn_LayHang_shipper"
+                    android:textColor="#FFFFFF"
                     android:textSize="15dp"
                     android:textStyle="bold" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Phí vận chuyển:"
-                    android:textSize="12dp" />
+                    android:layout_gravity="top|right"
+                    android:visibility="gone"
+                    android:text="Giao hàng"
+                    android:background="@layout/border_btn"
+                    android:drawableLeft="@drawable/ic_phone_black_24dp"
+                    android:padding="5dp"
+                    android:id="@+id/btn_GuiHang_shipper"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            </FrameLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" 100.000đ"
-                        android:id="@+id/tv_single_tienship"
-                        android:textColor="#111111"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

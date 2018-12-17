@@ -3,7 +3,9 @@ package com.example.huypm.turtle_ship.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DonHangForShipper {
+import java.io.Serializable;
+
+public class DonHangForShipper implements Serializable {
 
     @SerializedName("Id")
     @Expose

@@ -23,6 +23,7 @@ import com.example.huypm.turtle_ship.R;
 import com.example.huypm.turtle_ship.Service.APIManagerment;
 import com.example.huypm.turtle_ship.Service.DataClient;
 import com.example.huypm.turtle_ship.model.DonHangForShipper;
+import com.example.huypm.turtle_ship.model.DonHangFullInfo;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -59,12 +60,12 @@ public class map_view_shipper extends Fragment implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         DataClient getDonHang = APIManagerment.getData();
-        Call<List<DonHangForShipper>> callback = getDonHang.getDonHangShipper();
-        callback.enqueue(new Callback<List<DonHangForShipper>>() {
+        Call<List<DonHangFullInfo>> callback = getDonHang.getDonHangShipper();
+        callback.enqueue(new Callback<List<DonHangFullInfo>>() {
             @Override
-            public void onResponse(Call<List<DonHangForShipper>> call, Response<List<DonHangForShipper>> response) {
+            public void onResponse(Call<List<DonHangFullInfo>> call, Response<List<DonHangFullInfo>> response) {
                 mMap.clear();
-                ArrayList<DonHangForShipper> mangdonhang = (ArrayList<DonHangForShipper>) response.body();
+                ArrayList<DonHangFullInfo> mangdonhang = (ArrayList<DonHangFullInfo>) response.body();
                 for (int i = 0; i< mangdonhang.size(); i++){
 
                 }
@@ -72,7 +73,7 @@ public class map_view_shipper extends Fragment implements OnMapReadyCallback {
             }
 
             @Override
-            public void onFailure(Call<List<DonHangForShipper>> call, Throwable t) {
+            public void onFailure(Call<List<DonHangFullInfo>> call, Throwable t) {
 
             }
         });

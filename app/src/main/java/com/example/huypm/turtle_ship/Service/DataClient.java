@@ -111,15 +111,15 @@ public interface DataClient {
                                 ,@Field("Weight") String weight);
 
     @POST("getDonHang.php")
-    Call<List<DonHangForShipper>> getDonHangShipper();
+    Call<List<DonHangFullInfo>> getDonHangShipper();
 
     @FormUrlEncoded
     @POST("getDonHangShipped.php")
-    Call<List<DonHangForShipper>> getDonHangShipped(@Field("Id") String id);
+    Call<List<DonHangFullInfo>> getDonHangShipped(@Field("Id") String id);
 
     @FormUrlEncoded
     @POST("getDonHangOfShipper.php")
-    Call<List<DonHangForShipper>> getDonHangOfShipper(@Field("Id") String id);
+    Call<List<DonHangFullInfo>> getDonHangOfShipper(@Field("Id") String id);
 
     @FormUrlEncoded
     @POST("updateCus_emp.php")
@@ -148,4 +148,18 @@ public interface DataClient {
     @POST("updateMainAddress.php")
     Call<String> updateMainAddress(@Field("Id") String id
                                     ,@Field("IdCus") String idcus);
+    @FormUrlEncoded
+    @POST("ShipperNhanDonHang.php")
+    Call<String> ShipperNhanDonHang(@Field("Id") String id
+                                    ,@Field("Shipper") String shipper);
+
+    @FormUrlEncoded
+    @POST("ShipperNhanHang.php")
+    Call<String> ShipperNhanHang(@Field("Id") String id,
+                                 @Field("NgayGiao") String ngaygiao);
+
+    @FormUrlEncoded
+    @POST("ShipperGiaoHang.php")
+    Call<String> ShipperGiaoHang(@Field("Id") String id,
+                                 @Field("NgayNhan") String ngaynhan);
 }
