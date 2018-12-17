@@ -412,6 +412,17 @@
                     android:textColor="#FFFFFF"
                     android:textSize="15dp"
                     android:textStyle="bold" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:background="#006666"
+                    android:text="Xem map"
+                    android:padding="5dp"
+                    android:id="@+id/btn_view_map"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
             </FrameLayout>
 
             <LinearLayout

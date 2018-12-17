@@ -44,6 +44,7 @@ public class single_order_shipper extends Fragment {
             tv_single_ngaynhan,tv_single_hinhthuc,tv_single_nguoinhan,tv_single_dcnhan,tv_single_nguoigui,tv_single_dcgui,tv_single_stt,tv_ship;
     Button btn_single_sdtnhan,btn_single_sdtgui,btn_NhanDon_shipper,btn_LayHang_shipper,btn_GuiHang_shipper;
     String number;
+    DiaChi dc;
     private static final int REQUEST_CALL = 1;
     @Nullable
     @Override
@@ -234,6 +235,7 @@ public class single_order_shipper extends Fragment {
             @Override
             public void onResponse(Call<List<DiaChi>> call, Response<List<DiaChi>> response) {
                 ArrayList<DiaChi> dcgui = (ArrayList<DiaChi>) response.body();
+                dc = dcgui.get(0);
                 tv_single_dcnhan.setText(dcgui.get(0).getDuong()+", "+dcgui.get(0).getPhuong()+", "+dcgui.get(0).getQuan()+", Tp. Hồ Chí Minh");
                 DataClient getdb1 = APIManagerment.getData();
                 Call<List<DiaChi>> callback = getdb1.getDiaChiID(itemDonHang.getDCNhanHang());
@@ -272,6 +274,24 @@ public class single_order_shipper extends Fragment {
             public void onClick(View v) {
                 number = btn_single_sdtgui.getText().toString().trim();
                 makePhoneCall();
+            }
+        });
+
+        Button btn_map = view.findViewById(R.id.btn_map_shipper);
+        btn_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new map_view();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft =  fm.beginTransaction();
+                ft.addToBackStack(null);
+                bundle.putString("spn_sent_list_add",tv_single_dcgui.getText().toString());
+                bundle.putString("et_diachi_step1",dc.getDuong());
+                bundle.putString("spn_state_receive",dc.getPhuong());
+                bundle.putString("spn_district_receive",dc.getQuan());
+                fragment.setArguments(bundle);
+                ft.replace(R.id.content_main_shipper,fragment);
+                ft.commit();
             }
         });
         return view;

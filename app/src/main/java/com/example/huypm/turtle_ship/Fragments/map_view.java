@@ -11,6 +11,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +45,7 @@ import Modules.Route;
 public class map_view extends Fragment implements OnMapReadyCallback, DirectionFinderListener {
     View view;
     private GoogleMap mMap;
-    private Button btnFindPath;
+    private Button btnFindPath,btn_back_map;
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
     private List<Polyline> polylinePaths = new ArrayList<>();
@@ -68,6 +70,14 @@ public class map_view extends Fragment implements OnMapReadyCallback, DirectionF
             @Override
             public void onClick(View v) {
                 sendRequest();
+            }
+        });
+        btn_back_map = (Button) view.findViewById(R.id.btn_back_map);
+        btn_back_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                fm.popBackStack();
             }
         });
         return view;

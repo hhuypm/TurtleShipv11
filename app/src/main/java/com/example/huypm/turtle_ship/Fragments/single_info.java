@@ -13,6 +13,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,6 +46,7 @@ public class single_info extends Fragment {
             ,tv_single_shipper,tv_single_tienship,tv_single_stt;
     Button btn_single_sdtshipper,btn_single_sdtnhan,btn_single_sdtgui;
     String number;
+    DiaChi dc;
 
     private static final int REQUEST_CALL = 1;
     @Override
@@ -55,7 +58,7 @@ public class single_info extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.single_infomation,container,false);
-        Bundle bundle = getArguments();
+        final Bundle bundle = getArguments();
         final ProgressDialog progress = ProgressDialog.show(getActivity(),
                 "Tải thông tin", "Đợi 1 chút xíu....", false, true, new DialogInterface.OnCancelListener() {
                     @Override
@@ -145,6 +148,7 @@ public class single_info extends Fragment {
             @Override
             public void onResponse(Call<List<DiaChi>> call, Response<List<DiaChi>> response) {
                 ArrayList<DiaChi> dcgui = (ArrayList<DiaChi>) response.body();
+                dc = dcgui.get(0);
                 tv_single_dcnhan.setText(dcgui.get(0).getDuong()+", "+dcgui.get(0).getPhuong()+", "+dcgui.get(0).getQuan()+", Tp. Hồ Chí Minh");
                 DataClient getdb1 = APIManagerment.getData();
                 Call<List<DiaChi>> callback = getdb1.getDiaChiID(itemDonHang.getDCNhanHang());
@@ -152,6 +156,7 @@ public class single_info extends Fragment {
                     @Override
                     public void onResponse(Call<List<DiaChi>> call, Response<List<DiaChi>> response) {
                         ArrayList<DiaChi> dcnhan = (ArrayList<DiaChi>) response.body();
+
                         tv_single_dcgui.setText(dcnhan.get(0).getDuong()+", "+dcnhan.get(0).getPhuong()+", "+dcnhan.get(0).getQuan()+", Tp. Hồ Chí Minh");
                         DataClient getdb = APIManagerment.getData();
                         Call<List<Customer_Employee>> callback = getdb.getCusEmpInfo(itemDonHang.getShipper());
@@ -211,6 +216,24 @@ public class single_info extends Fragment {
             public void onClick(View v) {
                 number = btn_single_sdtgui.getText().toString().trim();
                 makePhoneCall();
+            }
+        });
+
+        Button btn_xem_map = view.findViewById(R.id.btn_view_map);
+        btn_xem_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new map_view();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft =  fm.beginTransaction();
+                ft.addToBackStack(null);
+                bundle.putString("spn_sent_list_add",tv_single_dcgui.getText().toString());
+                bundle.putString("et_diachi_step1",dc.getDuong());
+                bundle.putString("spn_state_receive",dc.getPhuong());
+                bundle.putString("spn_district_receive",dc.getQuan());
+                fragment.setArguments(bundle);
+                ft.replace(R.id.content_main_shipper,fragment);
+                ft.commit();
             }
         });
 
