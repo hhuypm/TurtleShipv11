@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 
 import com.example.huypm.turtle_ship.Fragments.Orders;
 import com.example.huypm.turtle_ship.Fragments.infor_cus;
+import com.example.huypm.turtle_ship.Fragments.map_view_shipper;
 import com.example.huypm.turtle_ship.Fragments.order_step1;
 import com.example.huypm.turtle_ship.Fragments.status_oder;
 import com.example.huypm.turtle_ship.Fragments.status_oder1;
@@ -91,7 +92,7 @@ public class MainContentShiper extends AppCompatActivity
         if (id == R.id.DonHangShip) {
             fragment = new status_oder1();
         } else if (id == R.id.TimKiemDonHang) {
-
+            fragment = new map_view_shipper();
         } else if (id == R.id.QuanLyDonHang) {
             fragment = new status_oder();
 

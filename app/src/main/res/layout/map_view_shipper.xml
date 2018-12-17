@@ -7,6 +7,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"  >
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etOrigin"
+        android:hint="Enter origin address" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter destination address"
+        android:id="@+id/etDestination" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_nhandon_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@layout/border_btn"
+            android:text="Nhân đơn hàng" />
+    </LinearLayout>
 
     <fragment
         android:id="@+id/map_shipper"
