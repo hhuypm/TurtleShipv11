@@ -3,7 +3,9 @@ package com.example.huypm.turtle_ship.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DiaChi {
+import java.io.Serializable;
+
+public class DiaChi implements Serializable {
 
     @SerializedName("Id")
     @Expose

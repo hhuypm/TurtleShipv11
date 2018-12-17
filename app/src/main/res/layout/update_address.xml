@@ -62,7 +62,7 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:id="@+id/spn_district"
+                    android:id="@+id/spn_district_update"
                     android:textColor="#FFFFFF"
                     android:textSize="15dp"
                     android:layout_marginRight="10dp"
@@ -91,7 +91,7 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:id="@+id/spn_state"
+                    android:id="@+id/spn_state_update"
                     android:textColor="#FFFFFF"
                     android:textSize="15dp"
                     android:layout_marginRight="10dp"
@@ -105,29 +105,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <TextView
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:textColor="#3399FF"
-                android:textSize="15dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:text="Số điện thoại"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/textPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPhonetic"
-                    android:textColor="#3399FF"
-                    android:textSize="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="5dp"
-                    />
-            </LinearLayout>
+                android:layout_height="wrap_content"></LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,6 +128,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/et_address_update"
                     android:textColor="#3399FF"
                     android:textSize="15dp"/>
             </LinearLayout>

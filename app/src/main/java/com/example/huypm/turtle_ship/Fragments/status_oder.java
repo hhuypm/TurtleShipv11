@@ -52,7 +52,7 @@ public class status_oder extends Fragment {
 
         //Đây iD shipper
         String IdShipper = String.valueOf(bundle.getInt("ID"));
-        DataClient getDonHangOfShipper = APIManagerment.getData();
+        /*DataClient getDonHangOfShipper = APIManagerment.getData();
         Call<List<DonHangForShipper>> callback = getDonHangOfShipper.getDonHangOfShipper(IdShipper);
         callback.enqueue(new Callback<List<DonHangForShipper>>() {
             @Override
@@ -72,7 +72,7 @@ public class status_oder extends Fragment {
 
 
             }
-        });
+        });*/
 
         Button btn_search = (Button) view.findViewById(R.id.bt_search);
         btn_search.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +101,8 @@ public class status_oder extends Fragment {
         btn_nhanship.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                lv.setAdapter(null);
+                et.setText("");
                 if(statusbt1==false) {
                     btn_nhanship.setBackgroundColor(getResources().getColor(R.color.green));
                     btn_daship.setBackgroundColor(getResources().getColor(R.color.white));
@@ -137,6 +139,8 @@ public class status_oder extends Fragment {
         btn_daship.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                lv.setAdapter(null);
+                et.setText("");
                 if(statusbt1==true) {
                     btn_nhanship.setBackgroundColor(getResources().getColor(R.color.white));
                     btn_daship.setBackgroundColor(getResources().getColor(R.color.green));
@@ -179,9 +183,9 @@ public class status_oder extends Fragment {
         lv = view.findViewById(R.id.lv_quanlydonhang);
         Bundle bundle = getArguments();
         String IdShipper = String.valueOf(bundle.getInt("ID"));
-
-        DataClient getDonHangShipped = APIManagerment.getData();
-        Call<List<DonHangForShipper>> callback = getDonHangShipped.getDonHangShipped(IdShipper);
+        Log.d("Idshipper",IdShipper);
+        DataClient getDonHangOfShipper = APIManagerment.getData();
+        Call<List<DonHangForShipper>> callback = getDonHangOfShipper.getDonHangOfShipper(IdShipper);
         callback.enqueue(new Callback<List<DonHangForShipper>>() {
             @Override
             public void onResponse(Call<List<DonHangForShipper>> call, Response<List<DonHangForShipper>> response) {
@@ -196,7 +200,7 @@ public class status_oder extends Fragment {
 
             @Override
             public void onFailure(Call<List<DonHangForShipper>> call, Throwable t) {
-
+                Log.d("mang",t.getMessage());
             }
         });
 

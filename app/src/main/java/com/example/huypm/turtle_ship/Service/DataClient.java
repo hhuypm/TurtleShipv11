@@ -132,4 +132,20 @@ public interface DataClient {
     @POST("updateUsers.php")
     Call<String> updatePass(@Field("Id") String id
                             ,@Field("Pass") String pass);
+
+    @FormUrlEncoded
+    @POST("updateAddress.php")
+    Call<String> updateAddress(@Field("Id") String id
+            ,@Field("Quan") String quan
+            ,@Field("Phuong") String phuong
+            ,@Field("Duong") String duong);
+
+    @FormUrlEncoded
+    @POST("deleteAddress.php")
+    Call<String> deleteAddress(@Field("Id") String id);
+
+    @FormUrlEncoded
+    @POST("updateMainAddress.php")
+    Call<String> updateMainAddress(@Field("Id") String id
+                                    ,@Field("IdCus") String idcus);
 }

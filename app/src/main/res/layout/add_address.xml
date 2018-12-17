@@ -62,8 +62,8 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:id="@+id/spn_district"
                     android:textColor="#FFFFFF"
+                    android:id="@+id/spn_add_district"
                     android:textSize="15dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
@@ -91,43 +91,24 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:id="@+id/spn_state"
+                    android:id="@+id/spn_add_state"
                     android:textColor="#FFFFFF"
                     android:textSize="15dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:background="@layout/border_btn"
-                    android:layout_below="@+id/spn_district"></Spinner>
+                    android:layout_below="@+id/spn_add_district"></Spinner>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <TextView
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:textColor="#3399FF"
-                android:textSize="15dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:text="Số điện thoại"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/textPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPhonetic"
-                    android:textColor="#3399FF"
-                    android:textSize="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="5dp"
-                    />
-            </LinearLayout>
+                android:layout_height="wrap_content"></LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -148,14 +129,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#3399FF"
+                    android:id="@+id/et_add_street"
                     android:textSize="15dp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <Button
         android:layout_alignParentBottom="true"
-        android:id="@+id/btn_update_address"
-        android:text="Cập nhật"
+        android:id="@+id/btn_add_address"
+        android:text="Thêm địa chỉ"
         android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
