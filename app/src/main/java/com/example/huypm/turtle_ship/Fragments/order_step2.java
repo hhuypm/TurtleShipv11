@@ -9,11 +9,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.huypm.turtle_ship.OnFragmentManager;
 import com.example.huypm.turtle_ship.R;
@@ -22,6 +24,16 @@ public class order_step2 extends Fragment {
     OnFragmentManager listener;
     EditText et_mota,et_dinhgia,et_KhoiLuong,et_soluong;
     CheckBox cb_sent,cb_receive;
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+    }
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,25 +52,29 @@ public class order_step2 extends Fragment {
         btn_step_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new order_step3();
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft =  fm.beginTransaction();
-                ft.addToBackStack(null);
-                Bundle bd = new Bundle();
-                bd = listener.onDataSelected(bundle,"et_mota",et_mota.getText().toString());
-                bd = listener.onDataSelected(bd,"et_dinhgia",et_dinhgia.getText().toString());
-                bd = listener.onDataSelected(bd,"et_KhoiLuong",et_KhoiLuong.getText().toString());
-                bd = listener.onDataSelected(bd,"et_soluong",et_soluong.getText().toString());
-                if (cb_sent.isChecked())
-                   bd = listener.onDataSelected(bd,"hinhthuc","1");
-                if (cb_receive.isChecked())
-                   bd = listener.onDataSelected(bd,"hinhthuc","2");
-                fragment.setArguments(bd
-                );
+                if (et_dinhgia.getText().toString().trim().equals("") && et_KhoiLuong.getText().toString().trim().equals("") && et_mota.getText().toString().trim().equals("")&& et_soluong.getText().toString().trim().equals("")){
+                    Toast.makeText(getContext(), "Điền đủ thông tin", Toast.LENGTH_SHORT).show();
+                }else {
+                    Fragment fragment = new order_step3();
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.addToBackStack(null);
+                    Bundle bd = new Bundle();
+                    bd = listener.onDataSelected(bundle, "et_mota", et_mota.getText().toString());
+                    bd = listener.onDataSelected(bd, "et_dinhgia", et_dinhgia.getText().toString());
+                    bd = listener.onDataSelected(bd, "et_KhoiLuong", et_KhoiLuong.getText().toString());
+                    bd = listener.onDataSelected(bd, "et_soluong", et_soluong.getText().toString());
+                    if (cb_sent.isChecked())
+                        bd = listener.onDataSelected(bd, "hinhthuc", "1");
+                    if (cb_receive.isChecked())
+                        bd = listener.onDataSelected(bd, "hinhthuc", "2");
+                    fragment.setArguments(bd
+                    );
 
-                ft.replace(R.id.content_main,fragment);
+                    ft.replace(R.id.content_main, fragment);
 
-                ft.commit();
+                    ft.commit();
+                }
             }
         });
         et_mota = view.findViewById(R.id.et_mota);

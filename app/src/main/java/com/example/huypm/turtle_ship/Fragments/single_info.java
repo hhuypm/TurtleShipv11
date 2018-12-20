@@ -18,6 +18,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -52,7 +53,13 @@ public class single_info extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+    }
+
 
     @Nullable
     @Override
@@ -140,6 +147,41 @@ public class single_info extends Fragment {
                 break;
             case "3":
                 tv_single_stt.setText("Đã giao hàng");
+        }
+
+        if (itemDonHang.getTrangThai().equals("1")){
+            Button btn_huy = view.findViewById(R.id.btn_huy);
+            btn_huy.setVisibility(view.VISIBLE);
+            btn_huy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DataClient layhang = APIManagerment.getData();
+                    Call<String> callback = layhang.deleteOrder(itemDonHang.getId());
+                    callback.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if (response.body().equals("ok")){
+                                Fragment fragment = null;
+                                fragment = new single_info();
+                                FragmentManager fm = getFragmentManager();
+                                itemDonHang.setTrangThai("0");
+                                bundle.putSerializable("ItemDonHang",itemDonHang);
+                                fragment.setArguments(bundle);
+                                FragmentTransaction ft =  fm.beginTransaction();
+                                ft.replace(R.id.content_main,fragment);
+                                ft.commit();
+                                Toast.makeText(getContext(), "Hủy đơn thành công", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Log.d("huydon",t.getMessage());
+                            Toast.makeText(getContext(), "Hủy đơn Thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
         }
 
         DataClient getdb = APIManagerment.getData();

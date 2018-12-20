@@ -2,15 +2,22 @@ package com.example.huypm.turtle_ship.ADapter;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.huypm.turtle_ship.DBManager.TurtleShipManager;
+import com.example.huypm.turtle_ship.Fragments.status_oder1;
 import com.example.huypm.turtle_ship.R;
 import com.example.huypm.turtle_ship.Service.APIManagerment;
 import com.example.huypm.turtle_ship.Service.DataClient;
@@ -27,6 +34,9 @@ import retrofit2.Response;
 
 public class Adapter extends ArrayAdapter<DonHangFullInfo> {
     private Activity context;
+    private TextView lv_MaDH;
+    private TextView lv_Km;
+    private TextView lv_Tienhang,lv_Tienship;
 
     public Adapter(Activity context, int layoutID, List<DonHangFullInfo> objects) {
         super(context, layoutID, objects);
@@ -36,26 +46,50 @@ public class Adapter extends ArrayAdapter<DonHangFullInfo> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_list, null,
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_list2, null,
                     false);
         }
 
-        final DonHangFullInfo itemDonHang = getItem(position);
+        final DonHangFullInfo donHangForShipper = getItem(position);
 
-        TextView lv_Ten = (TextView) convertView.findViewById(R.id.lv_Ten);
-        final TextView lv_DiachiGui = (TextView) convertView.findViewById(R.id.lv_DiachiGui);
-        final TextView lv_DiachiNhan = (TextView) convertView.findViewById(R.id.lv_DiachiNhan);
-        TextView lv_Sodienthoai = (TextView) convertView.findViewById(R.id.lv_Sodienthoai);
+
+        lv_MaDH = (TextView) convertView.findViewById(R.id.lv_MaDH);
+        lv_Km = (TextView) convertView.findViewById(R.id.lv_Km);
+        final TextView lv_DiachiGui = (TextView) convertView.findViewById(R.id.lv_DiachiGui_shipper);
+        final TextView lv_DiachiNhan = (TextView) convertView.findViewById(R.id.lv_DiachiNhan_shipper);
+        lv_Tienhang = (TextView) convertView.findViewById(R.id.lv_Tienhang);
+        lv_Tienship = (TextView) convertView.findViewById(R.id.lv_Tienship);
         // Extract properties from cursor
+
+        switch (donHangForShipper.getTrangThai()){
+            case "0":
+                lv_MaDH.setText(donHangForShipper.getId()+"(Đã hủy)");
+                break;
+            case "1":
+                if (donHangForShipper.getShipper().equals("0")){
+                    lv_MaDH.setText(donHangForShipper.getId()+"(Chờ shipper nhận)");
+                }else {
+                    lv_MaDH.setText(donHangForShipper.getId()+"(Chờ shipper lấy hàng)");
+                }
+                break;
+            case "2":
+                lv_MaDH.setText(donHangForShipper.getId()+"(Đang giao)");
+                break;
+            case "3":
+                lv_MaDH.setText(donHangForShipper.getId()+"(Đã giao)");
+                break;
+        }
+
+        lv_Km.setText(donHangForShipper.getCaySo()+" km");
         DataClient diachiKH = APIManagerment.getData();
-        retrofit2.Call<List<DiaChi>> callback = diachiKH.getDiaChiID(itemDonHang.getDCNhanHang());
+        retrofit2.Call<List<DiaChi>> callback = diachiKH.getDiaChiID(donHangForShipper.getDCNhanHang());
         callback.enqueue(new Callback<List<DiaChi>>() {
             @Override
             public void onResponse(retrofit2.Call<List<DiaChi>> call, Response<List<DiaChi>> response) {
                 ArrayList<DiaChi> diachiKH = (ArrayList<DiaChi>) response.body();
                 lv_DiachiGui.setText("Địa chỉ gửi hàng:"+diachiKH.get(0).getDuong()+", "+diachiKH.get(0).getPhuong()+", "+diachiKH.get(0).getQuan());
                 DataClient diachiNH = APIManagerment.getData();
-                retrofit2.Call<List<DiaChi>> callback = diachiNH.getDiaChiID(itemDonHang.getDCGiaoHang());
+                retrofit2.Call<List<DiaChi>> callback = diachiNH.getDiaChiID(donHangForShipper.getDCGiaoHang());
                 callback.enqueue(new Callback<List<DiaChi>>() {
                     @Override
                     public void onResponse(retrofit2.Call<List<DiaChi>> call, Response<List<DiaChi>> response) {
@@ -76,10 +110,11 @@ public class Adapter extends ArrayAdapter<DonHangFullInfo> {
                 Log.d("loi~1",t.getMessage());
             }
         });
-        lv_Ten.setText(itemDonHang.getTen());
-        /*lv_DiachiGui.setText("Địa chỉ gửi hàng:"+dcgui.getString(5)+", "+dcgui.getString(4)+", "+dcgui.getString(3));
-        lv_DiachiNhan.setText("Địa chỉ nhận hàng:"+dcnhan.getString(5)+", "+dcnhan.getString(4)+", "+dcnhan.getString(3));*/
-        lv_Sodienthoai.setText(itemDonHang.getSDTNguoiNhan());
+
+        lv_Tienhang.setText("Tiền hàng: "+donHangForShipper.getDinhGia());
+        lv_Tienship.setText("Tiền ship: "+donHangForShipper.getThanhTien());
+
+
 
 
 

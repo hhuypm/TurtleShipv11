@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-import com.example.huypm.turtle_ship.DBManager.TurtleShipManager;
+
 import com.example.huypm.turtle_ship.Service.APIManagerment;
 import com.example.huypm.turtle_ship.Service.DataClient;
 import com.example.huypm.turtle_ship.model.Customer_Employee;
@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     EditText et_account;
     EditText et_pass;
     private Dialog dialog;
-    TurtleShipManager db = new TurtleShipManager(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,21 +77,22 @@ public class MainActivity extends AppCompatActivity {
                             callback.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
+                                    et_pass.setText("");
+                                    et_account.setText("");
                                     if (response.body().equals("0")){
                                         progress.dismiss();
                                         Intent intent = new Intent(getApplicationContext(), MainContent.class);
                                         intent.putExtra("ID",id);
                                         Log.d("item_list",String.valueOf(id));
-                                        showAlertDialog_DN();
-                                        startActivity(intent);
+                                        showAlertDialog_DN(intent);
                                     }else {
                                         // nhaan vien dang nhap o day
                                         progress.dismiss();
                                         Intent intent = new Intent(getApplicationContext(), MainContentShiper.class);
                                         intent.putExtra("ID",id);
                                         Log.d("item_list",String.valueOf(id));
-                                        showAlertDialog_DN();
-                                        startActivity(intent);
+                                        showAlertDialog_DN(intent);
+
                                     }
                                 }
 
@@ -140,7 +140,8 @@ public class MainActivity extends AppCompatActivity {
         //TurtleShipManager db = new TurtleShipManager(this);
     }
 
-    public void showAlertDialog_DN(){
+    public void showAlertDialog_DN(Intent intent){
+        final Intent it = intent;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Thông Báo");
         builder.setMessage("Đăng Nhập Thành Công");
@@ -149,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
+                startActivity(it);
             }
         });
         AlertDialog alertDialog = builder.create();

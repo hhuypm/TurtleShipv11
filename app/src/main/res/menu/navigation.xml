@@ -13,10 +13,6 @@
                     android:id="@+id/DonHang"
                     android:title="Đơn hàng" />
                 <item
-                    android:icon="@drawable/xe"
-                    android:id="@+id/TheoDoiDH"
-                    android:title="Theo dõi đơn hàng" />
-                <item
                     android:icon="@drawable/add"
                     android:id="@+id/TaoDonHang"
                     android:title="Tạo đơn hàng" />
@@ -42,21 +38,20 @@
     <item android:title="Ứng dụng">
         <menu>
             <group android:checkableBehavior="single">
-                <item
-                    android:icon="@drawable/out"
-                    android:id="@+id/DangXuat"
-                    android:title="Đăng Xuất" />
+
                 <item
                     android:icon="@drawable/person"
                     android:id="@+id/ThongtinTK"
                     android:title="Thông tin tài khoản" />
                 <item
+                    android:icon="@drawable/address"
                     android:id="@+id/listAdress"
                     android:title="Danh sách địa chỉ"/>
                 <item
-                    android:icon="@drawable/lock"
-                    android:id="@+id/DoiMatKhau"
-                    android:title="Đổi Mật Khẩu" />
+                    android:icon="@drawable/out"
+                    android:id="@+id/DangXuat"
+                    android:title="Đăng Xuất" />
+
             </group>
         </menu>
     </item>

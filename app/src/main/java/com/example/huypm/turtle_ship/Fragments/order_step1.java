@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,8 +21,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.huypm.turtle_ship.DBManager.TurtleShipManager;
+
 import com.example.huypm.turtle_ship.OnFragmentManager;
 import com.example.huypm.turtle_ship.R;
 import com.example.huypm.turtle_ship.Service.APIManagerment;
@@ -42,6 +44,16 @@ public class order_step1 extends Fragment {
     Context context_1;
     OnFragmentManager listener;
     int id_diachi_kh;
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+    }
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -246,24 +258,27 @@ public class order_step1 extends Fragment {
         btn_step_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new order_step2();
-                FragmentManager fm = getFragmentManager();
-                Bundle bd = new Bundle();
-                bd = listener.onDataSelected(bundle,"tv_name_sent",tv_name_sent.getText().toString());
-                bd = listener.onDataSelected(bd,"tv_phone_sent",tv_phone_sent.getText().toString());
-                bd = listener.onDataSelected(bd,"spn_sent_list_add",spn_sent_list_add.getSelectedItem().toString());
-                bd = listener.onDataSelected(bd,"spn_district_receive",spn_district_rv.getSelectedItem().toString());
-                bd = listener.onDataSelected(bd,"spn_state_receive",spn_state_receive.getSelectedItem().toString());
-                bd = listener.onDataSelected(bd,"id_diachi_kh",String.valueOf(id_diachi_kh));
-                bd = listener.onDataSelected(bd,"et_name_receive",et_name_receive.getText().toString());
-                bd = listener.onDataSelected(bd,"et_phone_step1",et_phone_step1.getText().toString());
-                bd = listener.onDataSelected(bd,"et_diachi_step1",et_diachi_step1.getText().toString());
-                fragment.setArguments(bd);
-                FragmentTransaction ft =  fm.beginTransaction();
-                ft.addToBackStack(null);
-                ft.replace(R.id.content_main,fragment);
-
-                ft.commit();
+                if (et_diachi_step1.getText().toString().trim().equals("")&&et_name_receive.getText().toString().trim().equals("")&&et_phone_step1.getText().toString().trim().equals("")){
+                    Toast.makeText(getContext(), "Điền đủ thông tin", Toast.LENGTH_SHORT).show();
+                }else {
+                    Fragment fragment = new order_step2();
+                    FragmentManager fm = getFragmentManager();
+                    Bundle bd = new Bundle();
+                    bd = listener.onDataSelected(bundle,"tv_name_sent",tv_name_sent.getText().toString());
+                    bd = listener.onDataSelected(bd,"tv_phone_sent",tv_phone_sent.getText().toString());
+                    bd = listener.onDataSelected(bd,"spn_sent_list_add",spn_sent_list_add.getSelectedItem().toString());
+                    bd = listener.onDataSelected(bd,"spn_district_receive",spn_district_rv.getSelectedItem().toString());
+                    bd = listener.onDataSelected(bd,"spn_state_receive",spn_state_receive.getSelectedItem().toString());
+                    bd = listener.onDataSelected(bd,"id_diachi_kh",String.valueOf(id_diachi_kh));
+                    bd = listener.onDataSelected(bd,"et_name_receive",et_name_receive.getText().toString());
+                    bd = listener.onDataSelected(bd,"et_phone_step1",et_phone_step1.getText().toString());
+                    bd = listener.onDataSelected(bd,"et_diachi_step1",et_diachi_step1.getText().toString());
+                    fragment.setArguments(bd);
+                    FragmentTransaction ft =  fm.beginTransaction();
+                    ft.addToBackStack(null);
+                    ft.replace(R.id.content_main,fragment);
+                    ft.commit();
+                }
             }
         });
 

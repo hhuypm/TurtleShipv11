@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.huypm.turtle_ship.DBManager.TurtleShipManager;
+
 import com.example.huypm.turtle_ship.Fragments.list_Address;
 import com.example.huypm.turtle_ship.Fragments.status_oder1;
 import com.example.huypm.turtle_ship.R;

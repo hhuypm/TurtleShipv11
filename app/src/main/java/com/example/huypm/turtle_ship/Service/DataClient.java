@@ -162,4 +162,30 @@ public interface DataClient {
     @POST("ShipperGiaoHang.php")
     Call<String> ShipperGiaoHang(@Field("Id") String id,
                                  @Field("NgayNhan") String ngaynhan);
+
+
+    @FormUrlEncoded
+    @POST("getDonHangSTT1notShipper.php")
+    Call<List<DonHangFullInfo>> getDonHangSTT1notShipper(@Field("Id") String id);
+
+    @FormUrlEncoded
+    @POST("getDonHangSTT1Shipper.php")
+    Call<List<DonHangFullInfo>> getDonHangSTT1Shipper(@Field("Id") String id);
+
+    @FormUrlEncoded
+    @POST("getDonHangFinished.php")
+    Call<List<DonHangFullInfo>> getDonHangFinished(@Field("Id") String id);
+
+    @FormUrlEncoded
+    @POST("getDonHangShipping.php")
+    Call<List<DonHangFullInfo>> getDonHangShipping(@Field("Id") String id);
+
+    @FormUrlEncoded
+    @POST("getDonHangDeleted.php")
+    Call<List<DonHangFullInfo>> getDonHangDeleted(@Field("Id") String id);
+
+    @FormUrlEncoded
+    @POST("deleteOrder.php")
+    Call<String> deleteOrder(@Field("Id") String id);
+
 }

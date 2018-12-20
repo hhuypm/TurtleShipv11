@@ -19,14 +19,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.huypm.turtle_ship.DBManager.TurtleShipManager;
+
 import com.example.huypm.turtle_ship.Service.APIManagerment;
 import com.example.huypm.turtle_ship.Service.DataClient;
 import com.example.huypm.turtle_ship.Service.Server;
@@ -58,9 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
     int  maxidAddress = -1;
     int maxidCus_Emp = -1;
     int maxidUser = -1;
-    TurtleShipDBManagerment turtleShipDBManagerment = new TurtleShipDBManagerment();
     AlertDialog alertDialog;
-    TurtleShipManager db = new TurtleShipManager(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

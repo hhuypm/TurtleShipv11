@@ -12,23 +12,19 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CursorAdapter;
 import android.widget.ListView;
 
 import com.example.huypm.turtle_ship.ADapter.Adapter;
-import com.example.huypm.turtle_ship.ADapter.adapter_itemlist;
-import com.example.huypm.turtle_ship.DBManager.TurtleShipManager;
+
 import com.example.huypm.turtle_ship.OnFragmentManager;
 import com.example.huypm.turtle_ship.R;
 import com.example.huypm.turtle_ship.Service.APIManagerment;
 import com.example.huypm.turtle_ship.Service.DataClient;
-import com.example.huypm.turtle_ship.model.DonHangForShipper;
 import com.example.huypm.turtle_ship.model.DonHangFullInfo;
-import com.example.huypm.turtle_ship.model.ItemDonHang;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,18 +39,24 @@ public class Orders extends Fragment  {
     ListView lv;
     OnFragmentManager listener;
     ArrayList<DonHangFullInfo> manginfodonhang = null;
+    String idcus;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.oders,container,false);
-        TurtleShipManager db = new TurtleShipManager(getContext());
+
         final Bundle bundle = getArguments();
-        Cursor cursor = db.getOrders(bundle.getInt("ID"));
+        idcus = String.valueOf(bundle.getInt("ID"));
+
         lv = view.findViewById(R.id.lv_orders);
-        /*adapter_itemlist itemlist  = new adapter_itemlist(getActivity(),cursor);
-        lv.setAdapter(itemlist);
-        itemlist.changeCursor(cursor);*/
+
         final ProgressDialog progress = ProgressDialog.show(getActivity(),
                 "Tải thông tin", "Đợi 1 chút xíu....", false, true, new DialogInterface.OnCancelListener() {
                     @Override
@@ -78,6 +80,7 @@ public class Orders extends Fragment  {
             @Override
             public void onFailure(Call<List<DonHangFullInfo>> call, Throwable t) {
                 Log.d("aasd",t.getMessage());
+                progress.dismiss();
             }
         });
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -115,5 +118,157 @@ public class Orders extends Fragment  {
         getActivity().setTitle("Đơn hàng");
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        lv.setAdapter(null);
+        final ProgressDialog progress = ProgressDialog.show(getActivity(),
+                "Tải thông tin", "Đợi 1 chút xíu....", false, true, new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
 
+                    }
+                });
+        progress.show();
+        switch (item.getItemId()) {
+            case R.id.All :
+            {
+
+                DataClient getInfoDonHang = APIManagerment.getData();
+                Call<List<DonHangFullInfo>> callback = getInfoDonHang.getInfoDonHang(idcus);
+                callback.enqueue(new Callback<List<DonHangFullInfo>>() {
+                    @Override
+                    public void onResponse(Call<List<DonHangFullInfo>> call, Response<List<DonHangFullInfo>> response) {
+                        manginfodonhang = (ArrayList<DonHangFullInfo>) response.body();
+                        adapterInfoDonHang = new Adapter(getActivity(),1,manginfodonhang);
+                        lv.setAdapter(adapterInfoDonHang);
+                        progress.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<DonHangFullInfo>> call, Throwable t) {
+                        Log.d("aasd",t.getMessage());
+                        progress.dismiss();
+                    }
+                });
+                //Write here what to do you on click
+                return true;
+            }
+            case R.id.not_shipper :
+            {
+
+                DataClient getInfoDonHang = APIManagerment.getData();
+                Call<List<DonHangFullInfo>> callback = getInfoDonHang.getDonHangSTT1notShipper(idcus);
+                callback.enqueue(new Callback<List<DonHangFullInfo>>() {
+                    @Override
+                    public void onResponse(Call<List<DonHangFullInfo>> call, Response<List<DonHangFullInfo>> response) {
+                        manginfodonhang = (ArrayList<DonHangFullInfo>) response.body();
+                        adapterInfoDonHang = new Adapter(getActivity(),1,manginfodonhang);
+                        lv.setAdapter(adapterInfoDonHang);
+                        progress.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<DonHangFullInfo>> call, Throwable t) {
+                        Log.d("aasd",t.getMessage());
+                        progress.dismiss();
+                    }
+                });
+                //Write here what to do you on click
+                return true;
+            }
+            case R.id.Doi_shipper :
+            {
+
+                DataClient getInfoDonHang = APIManagerment.getData();
+                Call<List<DonHangFullInfo>> callback = getInfoDonHang.getDonHangSTT1Shipper(idcus);
+                callback.enqueue(new Callback<List<DonHangFullInfo>>() {
+                    @Override
+                    public void onResponse(Call<List<DonHangFullInfo>> call, Response<List<DonHangFullInfo>> response) {
+                        manginfodonhang = (ArrayList<DonHangFullInfo>) response.body();
+                        adapterInfoDonHang = new Adapter(getActivity(),1,manginfodonhang);
+                        lv.setAdapter(adapterInfoDonHang);
+                        progress.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<DonHangFullInfo>> call, Throwable t) {
+                        Log.d("aasd",t.getMessage());
+                        progress.dismiss();
+                    }
+                });
+                //Write here what to do you on click
+                return true;
+            }
+            case R.id.Giao_hang :
+            {
+
+                DataClient getInfoDonHang = APIManagerment.getData();
+                Call<List<DonHangFullInfo>> callback = getInfoDonHang.getDonHangShipping(idcus);
+                callback.enqueue(new Callback<List<DonHangFullInfo>>() {
+                    @Override
+                    public void onResponse(Call<List<DonHangFullInfo>> call, Response<List<DonHangFullInfo>> response) {
+                        manginfodonhang = (ArrayList<DonHangFullInfo>) response.body();
+                        adapterInfoDonHang = new Adapter(getActivity(),1,manginfodonhang);
+                        lv.setAdapter(adapterInfoDonHang);
+                        progress.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<DonHangFullInfo>> call, Throwable t) {
+                        Log.d("aasd",t.getMessage());
+                        progress.dismiss();
+                    }
+                });
+                //Write here what to do you on click
+                return true;
+            }
+            case R.id.Da_giao :
+            {
+
+                DataClient getInfoDonHang = APIManagerment.getData();
+                Call<List<DonHangFullInfo>> callback = getInfoDonHang.getDonHangFinished(idcus);
+                callback.enqueue(new Callback<List<DonHangFullInfo>>() {
+                    @Override
+                    public void onResponse(Call<List<DonHangFullInfo>> call, Response<List<DonHangFullInfo>> response) {
+                        manginfodonhang = (ArrayList<DonHangFullInfo>) response.body();
+                        adapterInfoDonHang = new Adapter(getActivity(),1,manginfodonhang);
+                        lv.setAdapter(adapterInfoDonHang);
+                        progress.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<DonHangFullInfo>> call, Throwable t) {
+                        Log.d("aasd",t.getMessage());
+                        progress.dismiss();
+                    }
+                });
+                //Write here what to do you on click
+                return true;
+            }
+            case R.id.Da_huy :
+            {
+
+                DataClient getInfoDonHang = APIManagerment.getData();
+                Call<List<DonHangFullInfo>> callback = getInfoDonHang.getDonHangDeleted(idcus);
+                callback.enqueue(new Callback<List<DonHangFullInfo>>() {
+                    @Override
+                    public void onResponse(Call<List<DonHangFullInfo>> call, Response<List<DonHangFullInfo>> response) {
+                        manginfodonhang = (ArrayList<DonHangFullInfo>) response.body();
+                        adapterInfoDonHang = new Adapter(getActivity(),1,manginfodonhang);
+                        lv.setAdapter(adapterInfoDonHang);
+                        progress.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<DonHangFullInfo>> call, Throwable t) {
+                        Log.d("aasd",t.getMessage());
+                        progress.dismiss();
+                    }
+                });
+                //Write here what to do you on click
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

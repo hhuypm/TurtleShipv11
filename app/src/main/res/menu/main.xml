@@ -2,8 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/All"
         android:orderInCategory="100"
-        android:title="setting"
+        android:title="Tất cả"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/not_shipper"
+        android:orderInCategory="100"
+        android:title="Chưa có shipper nhận"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/Doi_shipper"
+        android:orderInCategory="100"
+        android:title="Đợi shipper lấy hàng"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/Giao_hang"
+        android:orderInCategory="100"
+        android:title="Đang giao hàng"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/Da_giao"
+        android:orderInCategory="100"
+        android:title="Đã giao hàng"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/Da_huy"
+        android:orderInCategory="100"
+        android:title="Đã hủy"
         app:showAsAction="never" />
 </menu>

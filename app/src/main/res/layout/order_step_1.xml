@@ -74,26 +74,16 @@
 
             <EditText
                 android:id="@+id/et_phone_step1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:hint="Số điện thoại người nhận"
                 android:textColor="#ffff"
                 android:textSize="15dp" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="230dp"
-                android:layout_marginTop="25dp"
-                android:background="@layout/border_btn"
-
-                android:text="Lịch sử"
-                android:textSize="15dp" />
-
             <EditText
                 android:id="@+id/et_name_receive"
-                android:layout_width="176dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:hint="Tên người nhận"
@@ -161,22 +151,16 @@
                 android:textSize="20dp" />
         </RelativeLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
-            android:background="@layout/border_btn"
 
-            android:text="Trở về" />
 
         <Button
             android:id="@+id/btn_next_step_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@layout/border_btn"
-            android:layout_marginLeft="270dp"
-            android:layout_marginTop="-50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="end"
             android:text="Tiếp theo" />
 
 

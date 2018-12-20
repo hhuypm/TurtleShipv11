@@ -1,5 +1,6 @@
 package com.example.huypm.turtle_ship;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,17 +10,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.CheckBox;
 
-import com.example.huypm.turtle_ship.Fragments.Orders;
-import com.example.huypm.turtle_ship.Fragments.infor_cus;
 import com.example.huypm.turtle_ship.Fragments.map_view_shipper;
-import com.example.huypm.turtle_ship.Fragments.order_step1;
 import com.example.huypm.turtle_ship.Fragments.status_oder;
 import com.example.huypm.turtle_ship.Fragments.status_oder1;
 
@@ -47,6 +45,14 @@ public class MainContentShiper extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_shipper);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.DonHangShip);
+        bundle.putInt("ID",id_cus);
+        Fragment fragment = new status_oder1();
+        fragment.setArguments(bundle);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft =  fm.beginTransaction();
+        ft.replace(R.id.content_main_shipper,fragment);
+        ft.commit();
 
     }
 
@@ -63,7 +69,6 @@ public class MainContentShiper extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_shipper, menu);
         return true;
     }
 
@@ -96,15 +101,26 @@ public class MainContentShiper extends AppCompatActivity
         } else if (id == R.id.QuanLyDonHang) {
             fragment = new status_oder();
 
-        } else if (id == R.id.DSThongBao) {
-
-        } else if (id == R.id.QuanLyThongTin) {
-            fragment = new infor_cus();
         } else if (id == R.id.LienHe) {
 
         } else if (id == R.id.DoiMatKhau) {
 
         } else if (id == R.id.Thoat) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Bạn muốn thoát?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            MainContentShiper.this.finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
 
         }
 

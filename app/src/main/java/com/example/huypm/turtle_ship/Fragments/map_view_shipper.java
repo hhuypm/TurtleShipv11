@@ -153,6 +153,9 @@ public class map_view_shipper extends Fragment implements OnMapReadyCallback,Goo
             @Override
             public void onFailure(Call<List<DonHangFullInfo>> call, Throwable t) {
                 Log.d("mangloi",t.getMessage());
+                LatLng b = new LatLng( 10.766116, 106.659252);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(b, 15));
+                progress.dismiss();
 
             }
         });

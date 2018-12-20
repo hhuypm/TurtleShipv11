@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,7 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.huypm.turtle_ship.DBManager.TurtleShipManager;
+
 import com.example.huypm.turtle_ship.R;
 import com.example.huypm.turtle_ship.Service.APIManagerment;
 import com.example.huypm.turtle_ship.Service.DataClient;
@@ -54,6 +55,16 @@ public class order_step3 extends Fragment implements DirectionFinderListener {
     View view;
     private ProgressDialog progressDialog;
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Nullable
     @Override
@@ -135,7 +146,7 @@ public class order_step3 extends Fragment implements DirectionFinderListener {
                             }
                         });
                 progress.show();
-                TurtleShipManager db = new TurtleShipManager(getContext());
+
                 DataClient insertNguoiNhan = APIManagerment.getData();
                 retrofit2.Call<String> callback = insertNguoiNhan.InsertNguoiNhan(bundle.getString("et_name_receive"),bundle.getString("et_phone_step1"));
                 callback.enqueue(new Callback<String>() {

@@ -1,5 +1,6 @@
 package com.example.huypm.turtle_ship;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -54,6 +56,14 @@ public class MainContent extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.DonHang);
+        bundle.putInt("ID",id_cus);
+        Fragment fragment = new Orders();
+        fragment.setArguments(bundle);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft =  fm.beginTransaction();
+        ft.replace(R.id.content_main,fragment);
+        ft.commit();
 
     }
 
@@ -82,9 +92,7 @@ public class MainContent extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -99,9 +107,7 @@ public class MainContent extends AppCompatActivity
         if (id == R.id.DonHang) {
             fragment = new Orders();
             // Handle the camera action
-        } else if (id == R.id.TheoDoiDH) {
-            fragment = new single_info();
-        } else if (id == R.id.TaoDonHang) {
+        }  else if (id == R.id.TaoDonHang) {
             fragment = new order_step1();
 
         } else if (id == R.id.CachTinhPhi) {
@@ -110,13 +116,26 @@ public class MainContent extends AppCompatActivity
             fragment = new map_view();
 
         } else if (id == R.id.DangXuat) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Bạn muốn thoát?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            MainContent.this.finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
 
         } else if (id == R.id.ThongtinTK) {
             fragment = new account();
 
-        } else if (id == R.id.DoiMatKhau) {
-
-        } else if(id == R.id.listAdress){
+        }  else if(id == R.id.listAdress){
             fragment = new list_Address();
         }
 
