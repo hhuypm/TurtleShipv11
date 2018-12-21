@@ -53,7 +53,7 @@ public class map_view extends Fragment implements OnMapReadyCallback, DirectionF
     private EditText etOrigin;
     private EditText etDestination;
     private ProgressDialog progressDialog;
-
+    Fragment me = this;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

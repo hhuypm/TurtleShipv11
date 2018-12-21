@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
 
+import com.example.huypm.turtle_ship.Fragments.account;
 import com.example.huypm.turtle_ship.Fragments.map_view_shipper;
 import com.example.huypm.turtle_ship.Fragments.status_oder;
 import com.example.huypm.turtle_ship.Fragments.status_oder1;
@@ -103,7 +104,8 @@ public class MainContentShiper extends AppCompatActivity
 
         } else if (id == R.id.LienHe) {
 
-        } else if (id == R.id.DoiMatKhau) {
+        } else if (id == R.id.QuanLyThongTin) {
+            fragment = new account();
 
         } else if (id == R.id.Thoat) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);

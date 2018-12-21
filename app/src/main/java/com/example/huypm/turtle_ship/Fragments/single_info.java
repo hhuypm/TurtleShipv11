@@ -274,7 +274,7 @@ public class single_info extends Fragment {
                 bundle.putString("spn_state_receive",dc.getPhuong());
                 bundle.putString("spn_district_receive",dc.getQuan());
                 fragment.setArguments(bundle);
-                ft.replace(R.id.content_main_shipper,fragment);
+                ft.replace(R.id.content_main,fragment);
                 ft.commit();
             }
         });

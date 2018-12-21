@@ -55,7 +55,7 @@ import retrofit2.Response;
 public class map_view_shipper extends Fragment implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
     View view;
     private GoogleMap mMap;
-    private List<Marker> originMarkers = new ArrayList<>();
+    private ArrayList<Marker> originMarkers = new ArrayList<>();
     private ProgressDialog progressDialog;
     private static final int LOCATION_REQUEST = 500;
     ArrayList<DonHangFullInfo> mangdonhang1;
@@ -107,9 +107,10 @@ public class map_view_shipper extends Fragment implements OnMapReadyCallback,Goo
                 ArrayList<DonHangFullInfo> mangdonhang = (ArrayList<DonHangFullInfo>) response.body();
                 mangdonhang1 = mangdonhang;
                 for (int i = 0;i<mangdonhang1.size();i++){
+                    final int j = i;
                     DataClient latlng = APIManagerment.getData();
-                    final String id = mangdonhang1.get(0).getId();
-                    Call<List<DiaChi>> callback = latlng.getDiaChiID(mangdonhang1.get(0).getDCNhanHang());
+                    final String id = mangdonhang1.get(j).getId();
+                    Call<List<DiaChi>> callback = latlng.getDiaChiID(mangdonhang1.get(j).getDCNhanHang());
                     callback.enqueue(new Callback<List<DiaChi>>() {
                         @Override
                         public void onResponse(Call<List<DiaChi>> call, Response<List<DiaChi>> response) {
@@ -120,7 +121,7 @@ public class map_view_shipper extends Fragment implements OnMapReadyCallback,Goo
                             }
 
                             DataClient latlng = APIManagerment.getData();
-                            Call<List<DiaChi>> callback = latlng.getDiaChiID(mangdonhang1.get(0).getDCGiaoHang());
+                            Call<List<DiaChi>> callback = latlng.getDiaChiID(mangdonhang1.get(j).getDCGiaoHang());
                             callback.enqueue(new Callback<List<DiaChi>>() {
                                 @Override
                                 public void onResponse(Call<List<DiaChi>> call, Response<List<DiaChi>> response) {

@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:checked="true"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/white"
             android:onClick="onCheckboxClicked"
             android:text="Người gửi trả tiền"/>
         <CheckBox
@@ -37,6 +38,7 @@
             android:id="@+id/cb_receive"
             android:layout_marginTop="50dp"
             android:layout_width="wrap_content"
+            android:buttonTint="@color/white"
             android:onClick="onCheckboxClicked"
             android:layout_height="wrap_content" />
     </RelativeLayout>
@@ -99,22 +101,30 @@
             android:layout_width="130dp"
             android:layout_height="wrap_content" />
     </RelativeLayout>
-    <Button
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="100dp"
-        android:id="@+id/btn_back_step"
-        android:text="Trở về"
-        android:background="@layout/border_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
-        android:text="Tiếp theo"
-        android:id="@+id/btn_next_step_3"
-        android:layout_marginTop="-50dp"
-        android:layout_marginLeft="270dp"
-        android:background="@layout/border_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:layout_gravity="bottom|left"
+            android:id="@+id/btn_back_step"
+            android:text="Trở về"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@layout/border_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="Tiếp theo"
+            android:id="@+id/btn_next_step_3"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="bottom|right"
+            android:background="@layout/border_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
 
 </LinearLayout>
 
