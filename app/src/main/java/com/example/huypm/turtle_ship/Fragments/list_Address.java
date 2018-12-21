@@ -1,5 +1,7 @@
 package com.example.huypm.turtle_ship.Fragments;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -51,6 +53,14 @@ public class list_Address extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.address_list,container,false);
         final Bundle bundle = getArguments();
+        final ProgressDialog progress = ProgressDialog.show(getActivity(),
+                "Tải thông tin", "Đợi 1 chút xíu....", false, true, new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+
+                    }
+                });
+        progress.show();
         lv_address = view.findViewById(R.id.lv_address);
         DataClient getAddress = APIManagerment.getData();
         retrofit2.Call<List<DiaChi>> callback = getAddress.getDiaChi(String.valueOf(bundle.getInt("ID")));
@@ -60,6 +70,7 @@ public class list_Address extends Fragment {
                 ArrayList<DiaChi> mangdiachi = (ArrayList<DiaChi>) response.body();
                 Adapter_address adapterDiaChi = new Adapter_address(getActivity(),1,mangdiachi);
                 lv_address.setAdapter(adapterDiaChi);
+                progress.dismiss();
             }
 
             @Override
